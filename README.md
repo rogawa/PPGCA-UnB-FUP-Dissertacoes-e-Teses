@@ -9,8 +9,8 @@
 
 **Autor do template:** Rui Ogawa  
 **Afiliação:** PPGCA/UnB | Fiocruz Brasília | IFB Planaltina  
-**Contato:** rui.ogawa@unb.br  
-**Versão:** 1.0 (2025)  
+**Contato:** ruiogawa@gmail.com  
+**Versão:** 1.0 (2026)  
 **Licença:** Creative Commons BY 4.0
 
 ---
