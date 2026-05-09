@@ -49,11 +49,7 @@ ppgca-unb/
    - O Overleaf compilará automaticamente na sequência
      `pdfLaTeX → BibTeX → pdfLaTeX → pdfLaTeX`
 
-3. **Adicione a logo da UnB:**
-   - Baixe em: https://www.unb.br/identidade-visual
-   - Faça upload do arquivo como `unb-logo.png` (ou `.pdf`)
-
-4. **Configure seus dados** em `main.tex`:
+3. **Configure seus dados** em `main.tex`:
    - `\titulo{...}` — título do trabalho
    - `\autor{...}` — seu nome completo
    - `\orientador{...}` — nome do orientador
@@ -62,9 +58,9 @@ ppgca-unb/
    - Escolha entre `\tipodotrabalho{Tese de Doutorado}` ou
      `{Dissertação de Mestrado}`
 
-5. **Escreva seu conteúdo** nos arquivos dentro de `capitulos/`
+4. **Escreva seu conteúdo** nos arquivos dentro de `capitulos/`
 
-6. **Referências bibliográficas:**
+5. **Referências bibliográficas:**
    - Adicione entradas no arquivo `referencias.bib`
    - Cite no texto com `\cite{chave}` ou `\citeonline{chave}`
 
