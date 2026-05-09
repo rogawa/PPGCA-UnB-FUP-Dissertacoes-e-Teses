@@ -1,0 +1,683 @@
+% ============================================================
+%  TEMPLATE PARA TESE / DISSERTAÇÃO
+%  Programa de Pós-Graduação em Ciências Ambientais (PPGCA)
+%  Faculdade UnB de Planaltina – Universidade de Brasília
+% ------------------------------------------------------------
+%  Compatível com Overleaf gratuito (pdfLaTeX, < 20 s)
+%  Normas ABNT (NBR 14724:2011) via abntex2
+%  Autor do template: Rui Ogawa <ruiogawa@gmail.com>
+%  Versão: 1.2 (2026)
+% ============================================================
+
+% Opções globais — devem vir ANTES de \documentclass
+\PassOptionsToPackage{dvipsnames,table}{xcolor}
+\PassOptionsToPackage{brazilian,hyperpageref}{backref}
+
+\documentclass[
+  12pt,
+  openany,   % capítulos começam em qualquer página (sem folhas em branco)
+  oneside,   % PDF digital — troque por twoside+openright para impressão
+  a4paper,
+  english, brazil, sumario=tradicional
+]{abntex2}
+
+% ============================================================
+% CONFIGURAÇÃO DO TRABALHO – edite aqui
+% ============================================================
+
+\newcommand{\tipodotrabalho}{Tese de Doutorado}
+%\newcommand{\tipodotrabalho}{Dissertação de Mestrado}
+
+\newcommand{\grautitulo}{Doutor(a) em Ciências Ambientais}
+%\newcommand{\grautitulo}{Mestre(a) em Ciências Ambientais}
+
+\titulo{Título do Trabalho: subtítulo se houver}
+\autor{Fulano(a) de Tal}
+\local{Brasília/DF}
+\newcommand{\MesAno}{Mês/Ano}
+\data{\MesAno}
+
+\orientador{Prof. Dr. Nome do Orientador}
+% \coorientador{Prof. Dr. Nome do Coorientador}
+
+\instituicao{%
+  Universidade de Brasília \\
+  Faculdade UnB de Planaltina \\
+  Programa de Pós-Graduação em Ciências Ambientais}
+
+\newcommand{\areaConcentracao}{Estrutura, dinâmica e conservação ambiental}
+\newcommand{\linhaPesquisa}{Manejo e Conservação dos Recursos Naturais}
+
+\newcommand{\bancaPresidente}{Prof. Dr. Nome do Orientador -- Presidente\\Universidade de Brasília}
+\newcommand{\bancaTitularI}{Prof. Dr. Membro Titular 1 -- Membro Externo\\Nome da Instituição}
+\newcommand{\bancaTitularII}{Prof. Dr. Membro Titular 2 -- Membro Externo\\Nome da Instituição}
+\newcommand{\bancaTitularIII}{Prof. Dr. Membro Titular 3 -- Membro Interno\\Universidade de Brasília}
+\newcommand{\bancaSuplente}{Prof. Dr. Membro Suplente\\Universidade de Brasília}
+
+% Data de aprovação (folha de aprovação)
+\newcommand{\dataAprovacao}{\_\_\_ de \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ de \_\_\_\_\_\_}
+
+% Referência bibliográfica do trabalho (cabeçalho obrigatório dos resumos)
+% Formato: SOBRENOME, Nome. Título. Ano. N f. Tipo – Programa, Instituição, Local, Ano.
+\newcommand{\refbibliografica}{%
+  SOBRENOME, Nome. \textit{\imprimirtitulo}. \MesAno. N~f.
+  \tipodotrabalho~-- Programa de Pós-Graduação em Ciências Ambientais,
+  Faculdade UnB de Planaltina, Universidade de Brasília, Brasília, \MesAno.}
+
+% Renomeia "Lista de figuras" → "Lista de Ilustrações" (norma ABNT/UnB)
+\addto\captionsbrazil{\renewcommand{\listfigurename}{Lista de Ilustra\c{c}\~oes}}
+
+% ============================================================
+% PACOTES – apenas o essencial para compilar no Overleaf free
+% ============================================================
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}           % Times New Roman (texto e math)
+
+% abntex2 usa sans-serif nos títulos por padrão — forçamos serifada em tudo
+% \mdseries = peso médio (sem negrito) nos níveis menores — visual mais leve
+\renewcommand{\ABNTEXchapterfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXsectionfont}{\rmfamily}
+\renewcommand{\ABNTEXsubsectionfont}{\rmfamily\bfseries}
+\renewcommand{\ABNTEXsubsubsectionfont}{\rmfamily\itshape}
+\renewcommand{\ABNTEXsubsubsubsectionfont}{\rmfamily\itshape}
+\renewcommand{\ABNTEXchapterfontsize}{\Large}
+\renewcommand{\ABNTEXsectionfontsize}{\large}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
+
+% Regras de tabela (booktabs): intermediárias mais finas
+\setlength{\heavyrulewidth}{1.5pt}   % toprule / bottomrule — mais espessa
+\setlength{\lightrulewidth}{0.5pt}   % midrule — separador de grupos
+% \thinrule: separador entre linhas individuais de dados
+\newcommand{\thinrule}{\specialrule{0.2pt}{1pt}{1pt}}
+
+\usepackage{amsmath,amssymb}    % matemática
+
+\usepackage{graphicx}           % figuras
+\usepackage{caption}            % formatação de legendas (10pt, espaço simples)
+\usepackage{subcaption}         % subfiguras
+\usepackage{float}
+\graphicspath{{figuras/}}
+
+\usepackage{booktabs}           % tabelas profissionais
+\usepackage{multirow}           % células multilinhas
+\usepackage{tabularx}           % colunas flexíveis
+\usepackage{array}
+% \usepackage{longtable}        % tabelas longas (descomente se precisar)
+
+\usepackage{xcolor}             % cores (opções passadas acima)
+\definecolor{unb-verde}{RGB}{0,120,70}
+\definecolor{unb-azul}{RGB}{0,70,130}
+
+\usepackage{listings}           % blocos de código
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Lista de Códigos}
+\lstset{
+  basicstyle=\footnotesize\ttfamily,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{unb-azul}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{unb-verde},
+  captionpos=b,
+  float=htb,
+  inputencoding=utf8,
+  extendedchars=true,
+}
+
+\usepackage{url}
+\usepackage{lastpage}           % \pageref{LastPage}
+\usepackage{indentfirst}        % recuo no 1º parágrafo
+
+% Comando para exibir coorientador condicionalmente (sem @ no corpo do doc)
+\makeatletter
+\newcommand{\imprimircoorientadorifnotempty}[1]{%
+  \abntex@ifnotempty{\imprimircoorientador}{#1}}
+\makeatother
+% uso: \abreviatura{SIGLA}{Descrição por extenso}
+% saída: "Descrição por extenso (SIGLA)"
+\newcommand{\abreviatura}[2]{#2~(#1)}
+
+% --------------------------------------------------------
+%  BACKREF – citação reversa (clique na ref → volta ao texto)
+% --------------------------------------------------------
+\usepackage{backref}
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{%
+  \ifcase #1
+    \footnotesize\textit{Nenhuma citação no texto.}%
+  \or
+    \footnotesize\textit{Citado na página~#2.}%
+  \else
+    \footnotesize\textit{Citado #1~vezes nas páginas~#2.}%
+  \fi}
+
+% --------------------------------------------------------
+%  HYPERREF – abntex2 já carrega; apenas configuramos
+% --------------------------------------------------------
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  filecolor=black,
+  bookmarksnumbered=true,
+  pdftitle={\imprimirtitulo},
+  pdfauthor={\imprimirautor},
+  pdfsubject={\tipodotrabalho\ em Ciências Ambientais -- PPGCA/UnB},
+}
+
+% --------------------------------------------------------
+%  ABNTEX2CITE – citações ABNT autor-data
+% --------------------------------------------------------
+\usepackage[alf,
+  abnt-emphasize=bf,
+  abnt-etal-list=3,
+  abnt-etal-text=it,
+  abnt-and-type=e,
+  abnt-last-names=abnt,
+  abnt-repeated-author-omit=yes
+]{abntex2cite}
+
+% ============================================================
+%  PACOTES PARA INSTÂNCIA LOCAL / SELF-HOSTED (descomente)
+% ============================================================
+% \usepackage{pgfplots}             % gráficos tikz
+% \pgfplotsset{compat=1.18}
+% \usepgfplotslibrary{statistics}
+% \usepackage{siunitx}              % unidades SI
+% \sisetup{output-decimal-marker={,},group-separator={.}}
+% \usepackage{rotating}             % tabelas/figuras rotacionadas
+% \usepackage{pdfpages}             % incluir PDFs (ficha catalográfica)
+% \usepackage[final,kerning=true,spacing=false]{microtype}
+
+% ============================================================
+% FORMATAÇÃO
+% ============================================================
+
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+
+\OnehalfSpacing
+\setlength{\parindent}{1.25cm}
+
+% --------------------------------------------------------
+%  NOTAS DE RODAPÉ
+%  Filete de 3 cm a partir da margem esquerda (NBR 14724)
+%  Fonte 10pt, espaço simples
+% --------------------------------------------------------
+\renewcommand{\footnoterule}{%
+  \kern -3pt
+  \hrule width 3cm height 0.4pt
+  \kern 2.6pt
+}
+\renewcommand{\foottextfont}{\fontsize{10pt}{12pt}\selectfont}
+% Espaço simples dentro das notas de rodapé
+\makeatletter
+\renewcommand\@makefntext[1]{%
+  \SingleSpacing
+  \parindent 1em%
+  \noindent\hb@xt@1.8em{\hss\@makefnmark}#1}
+\makeatother
+
+% --------------------------------------------------------
+%  LEGENDAS (figuras e tabelas)
+%  Fonte 10pt, espaço simples (NBR 14724)
+% --------------------------------------------------------
+\captionsetup{
+  font       = {footnotesize, singlespacing},
+  labelfont  = bf,
+  labelsep   = endash,
+  justification = justified,
+  singlelinecheck = false,
+}
+\captionsetup[subfigure]{
+  font      = {footnotesize, singlespacing},
+  labelfont = normalfont,
+  labelformat = simple,
+  labelsep  = space,
+}
+
+% --------------------------------------------------------
+% --------------------------------------------------------
+%  CITAÇÕES LONGAS (mais de 3 linhas) – NBR 10520
+%  O abntex2 já formata corretamente via \begin{citacao}...\end{citacao}
+%  (fonte 10pt, espaço simples, recuo 4cm).
+%  Ajustamos apenas o recuo padrão:
+% --------------------------------------------------------
+\setlength{\ABNTEXcitacaorecuo}{4cm}
+
+\makepagestyle{ppgca}
+\makeoddfoot{ppgca}{}{\thepage}{}
+\makeevenfoot{ppgca}{}{\thepage}{}
+\makeheadrule{ppgca}{\textwidth}{\normalrulethickness}
+\makeoddhead{ppgca}{\small\itshape\imprimirtitulo}{}{}
+\makeevenhead{ppgca}{}{}{\small\itshape\imprimirautor}
+
+\counterwithin{equation}{chapter}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+
+% ============================================================
+% INÍCIO DO DOCUMENTO
+% ============================================================
+\begin{document}
+
+\frenchspacing
+\pagestyle{ppgca}
+
+% ============================================================
+% ELEMENTOS PRÉ-TEXTUAIS
+% ============================================================
+\pretextual
+
+% ------------------------------------------------------------
+% 1. CAPA
+% ------------------------------------------------------------
+\begin{capa}
+  \center
+  % Logo da UnB: baixe em unb.br/identidade-visual
+  % e faça upload como "unb-logo.png" na raiz do projeto
+  \includegraphics[width=3.5cm]{unb-logo}\\[0.5cm]
+  {\large\bfseries UNIVERSIDADE DE BRAS\'ILIA}\\
+  {\large\bfseries FACULDADE UNB DE PLANALTINA}\\
+  {\normalsize PROGRAMA DE P\'OS-GRADUA\c{C}\~AO EM CI\^ENCIAS AMBIENTAIS}
+  \vfill
+  {\large\bfseries\MakeUppercase{\imprimirtitulo}}
+  \vfill
+  {\large\imprimirautor}
+  \vfill
+  {\large\MakeUppercase{\tipodotrabalho}~EM CI\^ENCIAS AMBIENTAIS}
+  \vfill
+  {\large\imprimirlocal\\\MesAno}
+\end{capa}
+
+% ------------------------------------------------------------
+% 2. FOLHA DE ROSTO
+% ------------------------------------------------------------
+\begin{folhaderosto}
+  \center
+  {\large\bfseries UNIVERSIDADE DE BRAS\'ILIA}\\
+  {\large\bfseries FACULDADE UNB DE PLANALTINA}\\
+  {\normalsize PROGRAMA DE P\'OS-GRADUA\c{C}\~AO EM CI\^ENCIAS AMBIENTAIS}
+  \vfill
+  {\large\imprimirautor}
+  \vfill
+  {\large\bfseries\MakeUppercase{\imprimirtitulo}}
+  \vfill
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+    \SingleSpacing
+    \tipodotrabalho~apresentada ao Programa de
+    Pós-Graduação em Ciências Ambientais da
+    Universidade de Brasília como requisito para
+    obtenção do título de~\grautitulo.
+
+    \vspace{0.5cm}
+    \textbf{Área de concentração:} \areaConcentracao
+
+    \vspace{0.3cm}
+    \textbf{Linha de pesquisa:} \linhaPesquisa
+
+    \vspace{0.5cm}
+    \textbf{Orientador:} \imprimirorientador
+
+    % Coorientador: aparece apenas se \coorientador{} estiver definido
+    \imprimircoorientadorifnotempty{%
+      \vspace{0.3cm}
+      \textbf{Coorientador:} \imprimircoorientador
+    }
+  \end{minipage}%
+  \vfill
+  {\large\imprimirlocal\\\MesAno}
+\end{folhaderosto}
+
+% ------------------------------------------------------------
+% 3. FICHA CATALOGRÁFICA
+%    Gere em: ficha.bce.unb.br
+%    Opção A (oficial): \includepdf{ficha-catalografica}
+%    Opção B (rascunho): ambiente abaixo
+% ------------------------------------------------------------
+\begin{fichacatalografica}
+  % \includepdf{ficha-catalografica}  % descomente quando tiver o PDF oficial
+  \vspace*{\fill}
+  \begin{center}
+    \fbox{%
+      \begin{minipage}[c][8cm]{12.5cm}
+        \small
+        \hspace{0.5cm}SOBRENOME, Nome do Autor.\\
+        \hspace{0.5cm}\imprimirtitulo{} / \imprimirautor{} --
+        \imprimirlocal, \MesAno.\\
+        \hspace{0.5cm}\pageref{LastPage}~p.\\[0.3cm]
+        \hspace{0.5cm}\tipodotrabalho{} -- Universidade de Brasília,
+        Faculdade UnB de Planaltina, \MesAno.\\[0.3cm]
+        \hspace{0.5cm}1.~Palavra-chave 1. 2.~Palavra-chave 2.
+        3.~Palavra-chave 3. I.~\imprimirorientador, orient. II.~Título.
+      \end{minipage}%
+    }
+  \end{center}
+  \vspace*{\fill}
+\end{fichacatalografica}
+
+% ------------------------------------------------------------
+% 4. FOLHA DE APROVAÇÃO
+% ------------------------------------------------------------
+\begin{folhadeaprovacao}
+  \begin{center}
+    {\large\bfseries UNIVERSIDADE DE BRAS\'ILIA}\\
+    {\large\bfseries FACULDADE UNB DE PLANALTINA}\\
+    {\normalsize PROGRAMA DE P\'OS-GRADUA\c{C}\~AO EM CI\^ENCIAS AMBIENTAIS}
+    \vspace{0.8cm}
+
+    {\large\imprimirautor}
+    \vspace{0.8cm}
+
+    {\large\bfseries\MakeUppercase{\imprimirtitulo}}
+    \vspace{0.5cm}
+
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+      \SingleSpacing\small
+      \tipodotrabalho~apresentada ao Programa de
+      Pós-Graduação em Ciências Ambientais da
+      Universidade de Brasília como requisito para
+      obtenção do título de~\grautitulo.
+      \textbf{Área de concentração:} \areaConcentracao.
+      \textbf{Linha de pesquisa:} \linhaPesquisa.
+    \end{minipage}
+  \end{center}
+
+  \vspace{0.5cm}
+  \noindent Aprovado em: \dataAprovacao
+
+  \vspace{0.5cm}
+  \begin{center}
+  \noindent\textbf{BANCA EXAMINADORA}
+
+  \vspace{0.8cm}
+  \rule{8cm}{0.4pt}\\[2pt]
+  \bancaPresidente
+
+  \vspace{0.8cm}
+  \rule{8cm}{0.4pt}\\[2pt]
+  \bancaTitularI
+
+  \vspace{0.8cm}
+  \rule{8cm}{0.4pt}\\[2pt]
+  \bancaTitularII
+
+  \vspace{0.8cm}
+  \rule{8cm}{0.4pt}\\[2pt]
+  \bancaTitularIII
+
+  \vspace{0.8cm}
+  \rule{8cm}{0.4pt}\\[2pt]
+  \bancaSuplente
+  \end{center}
+\end{folhadeaprovacao}
+
+% ------------------------------------------------------------
+% 5. DEDICATÓRIA
+% ------------------------------------------------------------
+\begin{dedicatoria}
+  \vspace*{\fill}
+  \noindent\hfill
+  \begin{minipage}{.5\textwidth}
+    \itshape
+    Dedico este trabalho a \ldots
+  \end{minipage}
+\end{dedicatoria}
+
+% ------------------------------------------------------------
+% 6. AGRADECIMENTOS
+% ------------------------------------------------------------
+\begin{agradecimentos}
+  Agradeço ao Prof.\ Dr.\ \ldots
+
+  À Universidade de Brasília e ao PPGCA \ldots
+
+  À CAPES / CNPq / FAPDF pelo apoio financeiro \ldots
+\end{agradecimentos}
+
+% ------------------------------------------------------------
+% 7. EPÍGRAFE
+% ------------------------------------------------------------
+\begin{epigrafe}
+  \vspace*{\fill}
+  \noindent\hfill
+  \begin{minipage}{.5\textwidth}
+    \SingleSpacing\itshape
+    ``Insira aqui a epígrafe de sua escolha.''
+
+    \normalfont -- Autor da Epígrafe
+  \end{minipage}
+\end{epigrafe}
+
+% ------------------------------------------------------------
+% 8. RESUMO (português)
+% ------------------------------------------------------------
+\begin{resumo}
+  \SingleSpacing
+  % Cabeçalho obrigatório (NBR 14724): referência bibliográfica do trabalho
+  \refbibliografica
+
+  \vspace{\onelineskip}
+  \OnehalfSpacing
+  O mercúrio (Hg) é um contaminante global cuja dinâmica em solos
+  tropicais ainda é pouco compreendida, especialmente no bioma Cerrado.
+  Este trabalho investigou a distribuição, o fator de acumulação e o
+  sequestro de Hg nos solos e na serapilheira de ecossistemas de savana
+  da Estação Ecológica de Águas Emendadas (ESECAE), Distrito Federal,
+  Brasil. Foram realizadas três campanhas de coleta sazonais (período
+  seco, transição e chuvoso), com amostragem em três horizontes de solo
+  (0--10, 10--20 e 20--30 cm). O mercúrio total (HgT) foi determinado
+  por espectrometria de absorção atômica com vapor frio (CV-AAS).
+  As concentrações de HgT variaram entre 12,4 e 187,3 ng g$^{-1}$
+  (peso seco), com decréscimo significativo com a profundidade e
+  correlação positiva com o carbono orgânico total ($r^2 = 0{,}72$;
+  $p < 0{,}001$). Os resultados indicam que a matéria orgânica do solo
+  é o principal controlador da retenção de HgT no Cerrado e que a
+  sazonalidade influencia significativamente sua redistribuição vertical.
+
+  \vspace{\onelineskip}
+  \noindent
+  \textbf{Palavras-chave:} Mercúrio; Cerrado; Solo; Serapilheira;
+  Bioacumulação; Matéria orgânica.
+\end{resumo}
+
+% ------------------------------------------------------------
+% 9. ABSTRACT (inglês)
+% ------------------------------------------------------------
+\begin{resumo}[Abstract]
+  \begin{otherlanguage*}{english}
+    \SingleSpacing
+    % Mandatory reference header (NBR 14724)
+    \refbibliografica
+
+    \vspace{\onelineskip}
+    \OnehalfSpacing
+    Mercury (Hg) is a global contaminant whose dynamics in tropical soils
+    remain poorly understood, particularly in the Cerrado biome. This study
+    investigated the distribution, accumulation factor, and sequestration of
+    Hg in soils and litter of savanna ecosystems at the Águas Emendadas
+    Ecological Station (ESECAE), Federal District, Brazil. Three seasonal
+    sampling campaigns were conducted (dry, transition, and rainy seasons)
+    at three soil horizons (0--10, 10--20, and 20--30 cm). Total mercury
+    (THg) was determined by cold vapor atomic absorption spectrometry
+    (CV-AAS). THg concentrations ranged from 12.4 to 187.3 ng g$^{-1}$
+    (dry weight), with a significant decrease with depth and a positive
+    correlation with total organic carbon ($r^2 = 0.72$; $p < 0.001$).
+    Results indicate that soil organic matter is the main controller of
+    THg retention in Cerrado soils and that seasonality significantly
+    influences its vertical redistribution.
+
+    \vspace{\onelineskip}
+    \noindent
+    \textbf{Keywords:} Mercury; Cerrado; Soil; Litter;
+    Bioaccumulation; Organic matter.
+  \end{otherlanguage*}
+\end{resumo}
+
+% ------------------------------------------------------------
+% 10. LISTA DE FIGURAS
+% ------------------------------------------------------------
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\clearpage
+
+% ------------------------------------------------------------
+% 11. LISTA DE TABELAS
+% ------------------------------------------------------------
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\clearpage
+
+% ------------------------------------------------------------
+% 11b. LISTA DE CÓDIGOS
+% ------------------------------------------------------------
+\pdfbookmark[0]{\lstlistlistingname}{lol}
+\lstlistoflistings
+\clearpage
+
+% ------------------------------------------------------------
+% 12. LISTA DE ABREVIATURAS E SIGLAS
+% ------------------------------------------------------------
+\begin{siglas}
+  \item[ABNT]  Associação Brasileira de Normas Técnicas
+  \item[CAPES] Coordenação de Aperfeiçoamento de Pessoal de Nível Superior
+  \item[CNPq]  Conselho Nacional de Desenvolvimento Científico e Tecnológico
+  \item[DF]    Distrito Federal
+  \item[FAPDF] Fundação de Apoio à Pesquisa do Distrito Federal
+  \item[PPGCA] Programa de Pós-Graduação em Ciências Ambientais
+  \item[UnB]   Universidade de Brasília
+\end{siglas}
+
+% ------------------------------------------------------------
+% 13. LISTA DE SÍMBOLOS (remova se não usar)
+% ------------------------------------------------------------
+\begin{simbolos}
+  \item[$\alpha$] Coeficiente alfa
+  \item[$\beta$]  Coeficiente beta
+  \item[$\mu$]    Média aritmética
+  \item[$\sigma$] Desvio padrão
+\end{simbolos}
+
+% ------------------------------------------------------------
+% 14. SUMÁRIO
+% ------------------------------------------------------------
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\clearpage
+
+% ============================================================
+% ELEMENTOS TEXTUAIS
+% ============================================================
+\textual
+
+% ------------------------------------------------------------
+% AVISO DE CONTEÚDO FICTÍCIO (remova na versão final da tese)
+% ------------------------------------------------------------
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  \fbox{%
+    \begin{minipage}{0.85\textwidth}
+      \centering\vspace{0.4cm}
+      {\large\bfseries NOTA AO USUÁRIO DO TEMPLATE}
+      \vspace{0.3cm}
+
+      \SingleSpacing\normalsize
+      Todo o conteúdo textual, gráfico, tabular e bibliográfico
+      presente neste documento --- incluindo títulos de capítulos,
+      textos em \textit{lorem ipsum}, figuras, tabelas, equações,
+      blocos de código, referências bibliográficas, resumos e dados
+      numéricos --- é \textbf{estritamente fictício} e foi inserido
+      exclusivamente para demonstrar o \textit{layout} e a formatação
+      do template conforme as normas ABNT e as diretrizes do PPGCA/UnB.
+
+      \vspace{0.3cm}
+      Antes de submeter seu trabalho, \textbf{substitua todo o
+      conteúdo de exemplo} pelo conteúdo real da sua pesquisa
+      e \textbf{remova esta página}.
+      \vspace{0.4cm}
+    \end{minipage}%
+  }
+\end{center}
+\vspace*{\fill}
+\clearpage
+\setcounter{chapter}{0}
+
+\chapter{Introdução}
+\label{cap:introducao}
+\input{capitulos/01-introducao}
+
+\chapter{Materiais e Métodos}
+\label{cap:metodologia}
+\input{capitulos/02-materiais-metodos}
+
+\chapter{Recursos Financeiros}
+\label{cap:recursos}
+\input{capitulos/03-recursos-financeiros}
+
+\chapter{Cronograma}
+\label{cap:cronograma}
+\input{capitulos/04-cronograma}
+
+\chapter{Resultados e Discussão}
+\label{cap:resultados}
+\input{capitulos/05-resultados}
+
+\chapter{Exemplos de Elementos Gráficos e Tabelas}
+\label{cap:exemplos}
+\input{capitulos/07-exemplos}
+
+\chapter{Considerações Finais}
+\label{cap:conclusao}
+\input{capitulos/06-conclusao}
+
+% ============================================================
+% ELEMENTOS PÓS-TEXTUAIS
+% ============================================================
+\postextual
+
+% ------------------------------------------------------------
+% REFERÊNCIAS
+% ------------------------------------------------------------
+\bibliography{referencias}
+
+% ------------------------------------------------------------
+% APÊNDICES (material do próprio autor)
+% ------------------------------------------------------------
+\begin{apendicesenv}
+  \partapendices
+
+  \chapter{Título do Apêndice A}
+  \label{apend:a}
+  \input{capitulos/apendice-a}
+
+  \chapter{Título do Apêndice B}
+  \label{apend:b}
+  \input{capitulos/apendice-b}
+\end{apendicesenv}
+
+% ------------------------------------------------------------
+% ANEXOS (material de terceiros)
+% ------------------------------------------------------------
+\begin{anexosenv}
+  \partanexos
+
+  \chapter{Título do Anexo A}
+  \label{anex:a}
+  \input{capitulos/anexo-a}
+\end{anexosenv}
+
+\end{document}
+% ============================================================
+% FIM DO TEMPLATE – Rui Ogawa, PPGCA/UnB, 2025
+% ============================================================

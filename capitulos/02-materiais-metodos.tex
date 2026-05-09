@@ -1,0 +1,104 @@
+% capitulos/02-materiais-metodos.tex
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua \cite{exemplo:artigo:2024}.
+Os procedimentos adotados nesta pesquisa seguem as diretrizes estabelecidas
+por \citeonline{exemplo:livro:2020}.
+
+\section{Área de Estudo}
+
+A área de estudo compreende uma parcela de 50 ha inserida na Estação
+Ecológica de Águas Emendadas (\abreviatura{ESECAE}{Estação Ecológica de
+Águas Emendadas}), localizada no Distrito Federal (DF), Brasil
+(15°32'S, 47°36'W, altitude média de 1.050 m). O clima da região é
+classificado como Aw (tropical savânico) segundo a classificação de
+Köppen-Geiger, com precipitação média anual de 1.500 mm e temperatura
+média de 22 °C \cite{exemplo:web:2024}.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\rule{0pt}{6cm}\rule{12cm}{0pt}}
+  \caption{Pontos de coleta de amostras de solo e serapilheira na
+           área de estudo (ESECAE, DF). Os círculos indicam parcelas
+           amostradas e os triângulos indicam pontos controle.
+           Fonte: elaborado pelo autor (2025).}
+  \label{fig:pontos-coleta}
+\end{figure}
+
+\section{Coleta e Processamento de Amostras}
+
+As coletas foram realizadas em três campanhas sazonais: período seco
+(julho/2024), transição (outubro/2024) e período chuvoso (janeiro/2025).
+Em cada campanha foram amostrados 30 pontos distribuídos sistematicamente
+conforme a \autoref{fig:pontos-coleta}. Em cada ponto foram coletadas
+amostras de solo nas profundidades de 0--10 cm, 10--20 cm e 20--30 cm,
+totalizando 270 amostras de solo por campanha.
+
+As amostras foram acondicionadas em sacos plásticos de polietileno,
+identificadas e transportadas sob refrigeração ($4\,^\circ\text{C}$) ao
+\abreviatura{LQAA}{Laboratório de Química Ambiental e Agroecologia}
+da Faculdade UnB de Planaltina.
+
+\section{Análises Laboratoriais}
+
+\subsection{Determinação de Mercúrio Total}
+
+O mercúrio total (\abreviatura{HgT}{Mercúrio Total}) foi determinado
+por espectrometria de absorção atômica com vapor frio (\abreviatura{CV-AAS}{%
+Cold Vapor Atomic Absorption Spectrometry}), utilizando espectrômetro
+modelo RA-915+ (Lumex, Rússia), conforme metodologia descrita por
+\citeonline{exemplo:artigo:2024}. O limite de detecção do método foi
+de 0,001 ng g$^{-1}$ (peso seco).
+
+\subsection{Análises Físico-Químicas do Solo}
+
+O pH foi determinado em solução aquosa (relação solo:água = 1:2,5).
+O teor de carbono orgânico total (\abreviatura{COT}{Carbono Orgânico Total})
+foi determinado por oxidação via úmida com dicromato de potássio em meio
+ácido \cite{exemplo:livro:2020}. A \autoref{tab:analises} apresenta
+os parâmetros analisados e os respectivos métodos.
+
+\begin{table}[H]
+  \centering
+  \caption{Parâmetros físico-químicos analisados nas amostras de solo
+           e respectivos métodos de análise.}
+  \label{tab:analises}
+  \begin{tabularx}{\textwidth}{lXl}
+    \toprule
+    \textbf{Parâmetro} & \textbf{Método} & \textbf{Referência} \\
+    \midrule
+    pH                 & Potenciometria (solo:água 1:2,5)       & \cite{exemplo:livro:2020} \\
+    \thinrule
+    COT (\%)           & Oxidação via úmida (Walkley-Black)     & \cite{exemplo:livro:2020} \\
+    \thinrule
+    HgT (ng g$^{-1}$) & CV-AAS (RA-915+)                       & \cite{exemplo:artigo:2024} \\
+    \thinrule
+    Granulometria      & Pipeta (EMBRAPA)                       & \cite{exemplo:relatorio:2021} \\
+    \thinrule
+    Umidade (\%)       & Gravimetria ($105\,^\circ\text{C}$, 24 h)          & \cite{exemplo:livro:2020} \\
+    \bottomrule
+  \end{tabularx}
+  \fonte{Elaborado pelo autor (2025).}
+\end{table}
+
+\section{Análise Estatística}
+
+Os dados foram submetidos ao teste de normalidade de Shapiro-Wilk
+($\alpha = 0{,}05$). Para comparação entre campanhas e profundidades,
+utilizou-se análise de variância (\abreviatura{ANOVA}{Analysis of
+Variance}) de dois fatores, seguida do teste post-hoc de Tukey
+($p < 0{,}05$). O fator de bioacumulação (\abreviatura{BAF}{Bioaccumulation
+Factor}) foi calculado pela \autoref{eq:baf}:
+
+\begin{equation}
+  \label{eq:baf}
+  \mathrm{BAF} = \frac{C_{\text{organismo}}}{C_{\text{solo}}}
+\end{equation}
+
+\noindent em que $C_{\text{organismo}}$ é a concentração de HgT no
+organismo (ng g$^{-1}$, peso seco) e $C_{\text{solo}}$ é a
+concentração de HgT no solo (ng g$^{-1}$, peso seco).
+
+Todas as análises estatísticas foram realizadas no ambiente R versão
+4.3.2 \cite{exemplo:web:2024}, com nível de significância de 5\%.
+

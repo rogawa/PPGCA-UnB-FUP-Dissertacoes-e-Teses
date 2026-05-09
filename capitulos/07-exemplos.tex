@@ -1,0 +1,415 @@
+% capitulos/07-exemplos.tex
+% ============================================================
+%  EXEMPLOS DE ELEMENTOS GRÁFICOS, TABELAS E CÓDIGOS
+%  Este capítulo é apenas demonstrativo e deve ser removido
+%  ou adaptado para o conteúdo real da tese/dissertação.
+% ============================================================
+
+Este capítulo demonstra os principais elementos visuais disponíveis
+neste template, incluindo tabelas simples e complexas, figuras,
+subfiguras, fórmulas matemáticas, gráficos estatísticos, blocos de
+código-fonte e notas de rodapé.\footnote{As notas de rodapé são
+inseridas com o comando \texttt{\textbackslash footnote\{texto\}} e
+aparecem automaticamente na parte inferior da página corrente, numeradas
+de forma sequencial ao longo de todo o documento.}
+
+% ============================================================
+\section{Tabela Simples (Estilo ABNT com booktabs)}
+% ============================================================
+
+A \autoref{tab:turmas} exemplifica uma tabela no estilo ABNT,
+usando o pacote \texttt{booktabs} com linhas horizontais calibradas
+e cabeçalho em negrito, sem linhas verticais.\footnote{O estilo ABNT
+não recomenda o uso de linhas verticais em tabelas. Use \texttt{booktabs}
+sempre que possível.}
+
+\begin{table}[htb]
+  \centering
+  \caption{Turmas e participantes analisados na pesquisa.}
+  \label{tab:turmas}
+  \begin{tabularx}{\textwidth}{lllrr}
+    \toprule
+    \textbf{Universidade} & \textbf{Turma} & \textbf{Professor}
+      & \textbf{Alunos} & \textbf{Respostas} \\
+    \midrule
+    U1 & U1A-2023 & A & 63  & 3.695 \\
+    \thinrule
+    U2 & U2A-2023 & B & 13  &   365 \\
+    \thinrule
+    U2 & U2B-2023 & B & 42  &   794 \\
+    \midrule
+    U1 & U1A-2024 & A & 28  & 1.266 \\
+    \thinrule
+    U1 & U1B-2024 & C & 22  &   879 \\
+    \thinrule
+    U1 & U1C-2024 & D & 34  & 1.206 \\
+    \thinrule
+    U1 & U1D-2024 & E & 21  &   682 \\
+    \midrule
+    \multicolumn{2}{l}{2 Universidades / 7 Turmas}
+      & 5 Professores & 223 & 8.887 \\
+    \bottomrule
+  \end{tabularx}
+  \fonte{Elaborado pelo autor (2025).}
+\end{table}
+
+% ============================================================
+\section{Tabela Multicolunas com Divisores Verticais}
+% ============================================================
+
+A \autoref{tab:multicoluna} demonstra o uso de divisores verticais
+e cabeçalhos agrupados com \texttt{\textbackslash multicolumn},
+adequados para tabelas comparativas entre grupos ou períodos.
+
+\begin{table}[htb]
+  \centering
+  \caption{Respostas corretas e incorretas por questão e por ano.}
+  \label{tab:multicoluna}
+  \small
+  \begin{tabular}{cc r | rr r | rr r}
+    \toprule
+    \multirow{2}{*}{\textbf{Questão}}
+      & \multirow{2}{*}{\textbf{Lista}}
+      & \multirow{2}{*}{\textbf{Total}}
+      & \multicolumn{3}{c|}{\textbf{2023}}
+      & \multicolumn{3}{c}{\textbf{2024}} \\
+    \cmidrule(lr){4-6}\cmidrule(lr){7-9}
+      & & & \textbf{Corretas} & \textbf{\%}
+           & \textbf{Incorretas}
+           & \textbf{Corretas} & \textbf{\%}
+           & \textbf{Incorretas} \\
+    \midrule
+    01 & 01 & 1.083 & 104 & 17,22 & 500 & 103 & 21,25 & 376 \\
+    \thinrule
+    02 & 01 &   612 &  99 & 32,35 & 207 &  98 & 32,03 & 208 \\
+    \thinrule
+    03 & 01 &   708 &  94 & 25,90 & 269 &  93 & 26,96 & 252 \\
+    \thinrule
+    04 & 01 &   534 &  89 & 35,32 & 163 &  91 & 32,27 & 191 \\
+    \thinrule
+    05 & 01 &   503 &  87 & 29,49 & 208 &  96 & 46,15 & 112 \\
+    \midrule
+    06 & 02 &   492 &  79 & 23,94 & 251 &  80 & 49,38 &  82 \\
+    \thinrule
+    07 & 02 &   688 &  65 & 18,11 & 294 &  72 & 21,88 & 257 \\
+    \thinrule
+    08 & 02 &   503 &  70 & 29,29 & 169 &  72 & 27,27 & 192 \\
+    \thinrule
+    09 & 02 &   404 &  54 & 23,38 & 177 &  65 & 37,57 & 108 \\
+    \thinrule
+    10 & 03 &   354 &  73 & 34,60 & 138 &  73 & 51,05 &  70 \\
+    \bottomrule
+  \end{tabular}
+  \fonte{Dados da pesquisa (2025).}
+\end{table}
+
+% ============================================================
+\section{Tabela Longa com Continuação entre Páginas}
+% ============================================================
+
+% longtable foi removido do exemplo para reduzir o tempo de compilação
+% no Overleaf gratuito. O código abaixo mostra a estrutura para uso
+% local ou em instância self-hosted:
+%
+% \begin{longtable}{p{3.5cm} p{2cm} p{2cm} p{2cm} p{3cm}}
+%   \caption{Título da tabela longa.}\label{tab:longa}\\
+%   \toprule
+%   \textbf{Col A} & \textbf{Col B} & \textbf{Col C}
+%     & \textbf{Col D} & \textbf{Col E} \\
+%   \midrule
+%   \endfirsthead
+%   %
+%   \multicolumn{5}{r}{\small\itshape Continuação da página anterior}\\
+%   \toprule
+%   \textbf{Col A} & \textbf{Col B} & \textbf{Col C}
+%     & \textbf{Col D} & \textbf{Col E} \\
+%   \midrule
+%   \endhead
+%   %
+%   \midrule
+%   \multicolumn{5}{r}{\small\itshape Continua na próxima página}\\
+%   \endfoot
+%   %
+%   \bottomrule
+%   \endlastfoot
+%   %
+%   Dado 1 & a & b & c & d \\
+%   Dado 2 & e & f & g & h \\
+%   % ... repita quantas linhas forem necessárias
+% \end{longtable}
+
+% ============================================================
+\section{Figura Simples}
+% ============================================================
+
+A \autoref{fig:exemplo-simples} ilustra como inserir uma figura
+simples centralizada com legenda e fonte abaixo.\footnote{Imagens
+devem ser salvas na pasta \texttt{figuras/} e referenciadas pelo
+nome sem extensão. Formatos recomendados: PDF (vetorial) ou PNG
+(600 dpi mínimo para impressão).}
+
+\begin{figure}[htb]
+  \centering
+  % Substitua o \fbox abaixo por \includegraphics[width=0.7\textwidth]{nome-arquivo}
+  \fbox{\rule{0pt}{5cm}\rule{0.7\textwidth}{0pt}}
+  \caption{Perfil de concentração de HgT (ng g$^{-1}$) em função da
+           profundidade do solo nos pontos amostrais da ESECAE.
+           Barras horizontais indicam o desvio padrão ($n = 30$).}
+  \label{fig:exemplo-simples}
+  \fonte{Dados da pesquisa (2025).}
+\end{figure}
+
+% ============================================================
+\section{Figura em Duas Colunas (Subfiguras)}
+% ============================================================
+
+A \autoref{fig:subfiguras} demonstra o uso do ambiente
+\texttt{subfigure} para apresentar duas figuras lado a lado com
+legendas individuais e uma legenda geral.
+
+\begin{figure}[htb]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \fbox{\rule{0pt}{4.5cm}\rule{\linewidth}{0pt}}
+    \caption{Período seco (julho/2024).}
+    \label{fig:subfig-seca}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \fbox{\rule{0pt}{4.5cm}\rule{\linewidth}{0pt}}
+    \caption{Período chuvoso (janeiro/2025).}
+    \label{fig:subfig-chuva}
+  \end{subfigure}
+  \caption{Mapas de concentração de HgT na camada 0--10 cm
+           para os dois períodos extremos de amostragem:
+           \subref{fig:subfig-seca}~período seco e
+           \subref{fig:subfig-chuva}~período chuvoso.}
+  \label{fig:subfiguras}
+  \fonte{Dados da pesquisa (2025).}
+\end{figure}
+
+% ============================================================
+\section{Gráfico Boxplot (pgfplots)}
+% ============================================================
+
+A \autoref{fig:boxplot} apresenta boxplots comparativos das
+concentrações de HgT nos três horizontes de solo e nas três
+campanhas de coleta, gerados com o pacote \texttt{pgfplots}.
+
+% ============================================================
+\section{Gráfico Boxplot (via R ou Python)}
+% ============================================================
+
+O \texttt{pgfplots} não é carregado neste template por ser pesado
+demais para o limite de compilação do Overleaf gratuito (20 s).
+A abordagem recomendada — e mais prática — é gerar o gráfico
+externamente no R ou Python, exportar como \textbf{PDF vetorial}
+e inserir com \verb|\includegraphics|, conforme a
+\autoref{fig:boxplot}.
+
+\begin{figure}[htb]
+  \centering
+  % Substitua o \fbox por:
+  % \includegraphics[width=\textwidth]{figuras/boxplot_hgt}
+  \fbox{\rule{0pt}{6cm}\rule{\textwidth}{0pt}}
+  \caption{Distribuição das concentrações de HgT (ng g$^{-1}$)
+           por horizonte de solo e campanha de coleta.
+           As caixas representam o IQR, a linha central a mediana
+           e as hastes os valores extremos não discrepantes.}
+  \label{fig:boxplot}
+  \fonte{Dados da pesquisa (2025).}
+\end{figure}
+
+O \autoref{cod:r-boxplot} mostra o script R para gerar e exportar
+o boxplot como PDF pronto para inserção no LaTeX.
+
+\begin{lstlisting}[language=R,
+  caption={Script R para gerar boxplot e exportar como PDF.},
+  label=cod:r-boxplot]
+library(ggplot2)
+library(dplyr)
+
+dados <- read.csv("hgt_amostras.csv") |>
+  mutate(horizonte = factor(horizonte,
+                            levels = c("0-10","10-20","20-30")),
+         campanha  = factor(campanha,
+                            levels = c("seca","transicao","chuvosa"),
+                            labels = c("Seca","Transicao","Chuvosa")))
+
+p <- ggplot(dados, aes(x = horizonte, y = hgt, fill = campanha)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = 21, width = 0.6) +
+  scale_fill_manual(values = c("#004682","#00783E","#E87722")) +
+  labs(x = "Horizonte (cm)",
+       y = expression(HgT~(ng~g^{-1}~peso~seco)),
+       fill = "Campanha") +
+  theme_bw(base_size = 11) +
+  theme(legend.position = "top")
+
+# Exporta como PDF vetorial (ideal para LaTeX)
+ggsave("figuras/boxplot_hgt.pdf", p,
+       width = 16, height = 10, units = "cm")
+\end{lstlisting}
+
+% ============================================================
+\section{Fórmula Matemática Complexa}
+% ============================================================
+
+O modelo de distribuição espacial de HgT foi ajustado pelo
+estimador de máxima verossimilhança (MLE) com função de
+verossimilhança log-normal multivariada, conforme a
+\autoref{eq:mle-completa}:
+
+\begin{equation}
+  \label{eq:mle-completa}
+  \hat{\boldsymbol{\theta}} =
+    \underset{\boldsymbol{\theta}}{\arg\max}
+    \left[
+      -\frac{n}{2}\ln(2\pi)
+      -\frac{1}{2}\ln\left|\boldsymbol{\Sigma}(\boldsymbol{\theta})\right|
+      -\frac{1}{2}
+        \left(\mathbf{y} - \boldsymbol{\mu}\right)^{\!\top}
+        \boldsymbol{\Sigma}^{-1}(\boldsymbol{\theta})
+        \left(\mathbf{y} - \boldsymbol{\mu}\right)
+    \right]
+\end{equation}
+
+\noindent em que $\mathbf{y} \in \mathbb{R}^n$ é o vetor de
+concentrações observadas, $\boldsymbol{\mu}$ o vetor de médias,
+$\boldsymbol{\Sigma}(\boldsymbol{\theta})$ a matriz de
+covariância parametrizada por $\boldsymbol{\theta}$, e
+$|\cdot|$ denota o determinante matricial.
+
+A variograma experimental $\hat{\gamma}(h)$ foi estimada por:
+
+\begin{equation}
+  \label{eq:variograma}
+  \hat{\gamma}(h) =
+    \frac{1}{2\,|N(h)|}
+    \sum_{(i,j)\,\in\,N(h)}
+    \bigl[Z(\mathbf{s}_i) - Z(\mathbf{s}_j)\bigr]^2
+\end{equation}
+
+\noindent em que $N(h) = \{(i,j) : \|\mathbf{s}_i - \mathbf{s}_j\| = h\}$
+é o conjunto de pares de pontos separados pela distância de lag~$h$,
+$|N(h)|$ é a cardinalidade desse conjunto, e $Z(\mathbf{s})$ é
+o valor da variável regionalizada na posição $\mathbf{s}$.
+
+O modelo exponencial ajustado à variograma tem a forma:
+
+\begin{equation}
+  \label{eq:modelo-exponencial}
+  \gamma(h;\, C_0, C_1, a) =
+  \begin{cases}
+    0 & \text{se } h = 0 \\[4pt]
+    C_0 + C_1
+      \left[1 - \exp\!\left(-\dfrac{h}{a}\right)\right]
+    & \text{se } h > 0
+  \end{cases}
+\end{equation}
+
+\noindent em que $C_0$ é o efeito pepita (nugget), $C_1$ é o
+patamar parcial (sill), e $a$ é o alcance prático (range).
+
+% ============================================================
+\section{Exemplo de Código-Fonte (Listings)}
+% ============================================================
+
+O \autoref{cod:python-hg} apresenta o script Python utilizado para
+o cálculo automatizado do variograma experimental e ajuste do modelo
+exponencial às concentrações de HgT.\footnote{O código completo está
+disponível no repositório público do projeto em
+\url{https://github.com/usuario/ppgca-hg-cerrado}.}
+
+\begin{lstlisting}[language=Python,
+  caption={Script Python para calculo do variograma e ajuste de modelo exponencial.},
+  label=cod:python-hg]
+import numpy as np
+from scipy.optimize import curve_fit
+from scipy.spatial.distance import pdist, squareform
+
+def variograma_experimental(coords, valores, n_lags=15):
+    """
+    Calcula o variograma experimental.
+    
+    Parametros
+    ----------
+    coords  : np.ndarray, shape (n, 2) - coordenadas (X, Y)
+    valores : np.ndarray, shape (n,)   - valores observados
+    n_lags  : int - numero de classes de distancia (lags)
+    
+    Retorno
+    -------
+    lags, gamma : arrays com distancias e semivariancias medias
+    """
+    dist_mat = squareform(pdist(coords))
+    max_dist = dist_mat.max() / 2
+    lag_edges = np.linspace(0, max_dist, n_lags + 1)
+
+    lags, gamma = [], []
+    for k in range(n_lags):
+        h_min, h_max = lag_edges[k], lag_edges[k + 1]
+        mascara = (dist_mat > h_min) & (dist_mat <= h_max)
+        i_idx, j_idx = np.where(np.triu(mascara, k=1))
+        if len(i_idx) > 0:
+            diff = valores[i_idx] - valores[j_idx]
+            lags.append((h_min + h_max) / 2)
+            gamma.append(np.mean(diff ** 2) / 2)
+
+    return np.array(lags), np.array(gamma)
+
+
+def modelo_exponencial(h, C0, C1, a):
+    """Modelo exponencial de variograma."""
+    return C0 + C1 * (1 - np.exp(-h / a))
+
+
+# --- Uso ---
+coords  = np.loadtxt('coords_utm.csv', delimiter=',')
+hgt     = np.loadtxt('hgt_ng_g.csv',  delimiter=',')
+lags, gama = variograma_experimental(coords, hgt)
+
+popt, _ = curve_fit(modelo_exponencial, lags, gama,
+                    p0=[5, 50, 1000], maxfev=5000)
+C0_est, C1_est, a_est = popt
+print(f'Nugget C0 = {C0_est:.2f}  |  Sill C1 = {C1_est:.2f}'
+      f'  |  Range a = {a_est:.1f} m')
+\end{lstlisting}
+
+O \autoref{cod:r-anova} apresenta a análise de variância realizada
+no ambiente R para comparação das concentrações entre campanhas.
+
+\begin{lstlisting}[language=R,
+  caption={Script R para ANOVA de dois fatores e teste post-hoc de Tukey.},
+  label=cod:r-anova]
+# Carrega pacotes
+library(tidyverse)
+library(agricolae)
+
+# Le os dados
+dados <- read_csv("hgt_amostras.csv") |>
+  mutate(campanha  = factor(campanha,
+                            levels = c("seca", "transicao", "chuvosa")),
+         horizonte = factor(horizonte,
+                            levels = c("0-10", "10-20", "20-30")))
+
+# ANOVA de dois fatores
+modelo <- aov(hgt ~ campanha * horizonte, data = dados)
+summary(modelo)
+
+# Teste post-hoc de Tukey
+tukey <- TukeyHSD(modelo)
+print(tukey)
+
+# Grafico de interacao
+ggplot(dados, aes(x = horizonte, y = hgt, fill = campanha)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = 21) +
+  scale_fill_manual(values = c("#00783E", "#004682", "#E87722")) +
+  labs(x = "Horizonte (cm)",
+       y = expression(HgT~(ng~g^{-1})),
+       fill = "Campanha") +
+  theme_bw(base_size = 12)
+
+ggsave("boxplot_hgt.pdf", width = 18, height = 12, units = "cm")
+\end{lstlisting}
