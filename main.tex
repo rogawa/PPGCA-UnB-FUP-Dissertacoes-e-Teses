@@ -5,8 +5,8 @@
 % ------------------------------------------------------------
 %  Compatível com Overleaf gratuito (pdfLaTeX, < 20 s)
 %  Normas ABNT (NBR 14724:2011) via abntex2
-%  Autor do template: Rui Ogawa <ruiogawa@gmail.com>
-%  Versão: 1.2 (2026)
+%  Autor do template: Rui Ogawa <rui.ogawa@unb.br>
+%  Versão: 1.2 (2025)
 % ============================================================
 
 % Opções globais — devem vir ANTES de \documentclass
@@ -340,25 +340,43 @@
 
 % ------------------------------------------------------------
 % 3. FICHA CATALOGRÁFICA
-%    Gere em: ficha.bce.unb.br
-%    Opção A (oficial): \includepdf{ficha-catalografica}
-%    Opção B (rascunho): ambiente abaixo
+%    A ficha catalográfica é elaborada pela Biblioteca Central da UnB.
+%    Solicite em: https://ficha.bce.unb.br
+%    Prazo: 72 h após o envio do formulário.
+%    O arquivo PDF recebido deve ser salvo como "ficha-catalografica.pdf"
+%    na raiz do projeto e a linha \includepdf abaixo descomentada.
 % ------------------------------------------------------------
 \begin{fichacatalografica}
-  % \includepdf{ficha-catalografica}  % descomente quando tiver o PDF oficial
+  % ► Quando receber o PDF da BCE, salve-o como "ficha-catalografica.pdf"
+  %   na raiz do projeto, descomente a linha abaixo e apague o \fbox.
+  %   Requer \usepackage{pdfpages} no preâmbulo (já comentado lá).
+  %
+  % \includepdf{ficha-catalografica}
+
+  % Placeholder — remova este bloco ao incluir o PDF oficial
   \vspace*{\fill}
   \begin{center}
     \fbox{%
-      \begin{minipage}[c][8cm]{12.5cm}
-        \small
-        \hspace{0.5cm}SOBRENOME, Nome do Autor.\\
-        \hspace{0.5cm}\imprimirtitulo{} / \imprimirautor{} --
-        \imprimirlocal, \MesAno.\\
-        \hspace{0.5cm}\pageref{LastPage}~p.\\[0.3cm]
-        \hspace{0.5cm}\tipodotrabalho{} -- Universidade de Brasília,
-        Faculdade UnB de Planaltina, \MesAno.\\[0.3cm]
-        \hspace{0.5cm}1.~Palavra-chave 1. 2.~Palavra-chave 2.
-        3.~Palavra-chave 3. I.~\imprimirorientador, orient. II.~Título.
+      \begin{minipage}[c][14cm]{12cm}
+        \centering
+        \vspace{0.5cm}
+        {\large\bfseries FICHA CATALOGRÁFICA}\\[0.8cm]
+        \normalsize
+        A geração é \textbf{automática} pela BCE/UnB:\\[0.4cm]
+        \url{https://bce.unb.br/elaboracao-de-fichas-catalograficas/}\\[0.8cm]
+        \begin{minipage}{10cm}
+          \raggedright
+          Após receber o PDF, siga os passos:\\[0.4cm]
+          \textbf{1.} Salve o PDF como \texttt{ficha-catalografica.pdf}
+          na raiz do projeto.\\[0.3cm]
+          \textbf{2.} No \texttt{main.tex}, descomente a linha:\\
+          \hspace*{0.5cm}\texttt{\textbackslash includepdf\{ficha-catalografica\}}\\[0.3cm]
+          \textbf{3.} Apague o bloco \texttt{\textbackslash fbox\{...\}}
+          do placeholder.\\[0.3cm]
+          \textbf{4.} Descomente \texttt{\textbackslash usepackage\{pdfpages\}}
+          no preâmbulo.
+        \end{minipage}
+        \vspace{0.5cm}
       \end{minipage}%
     }
   \end{center}
