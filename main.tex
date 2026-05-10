@@ -75,6 +75,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage{mathptmx}           % Times New Roman (texto e math)
 
+% Desativa hifenização — ajuste de kerning automático via \sloppy
+\tolerance=2000
+\emergencystretch=3em
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\usepackage{mathptmx}           % Times New Roman (texto e math)
+ 
+% Desativa hifenização — justificação por ajuste de espaço entre palavras
+\tolerance=1000        % tolerância para espaço entre palavras
+\emergencystretch=3em  % espaço extra em último recurso (evita overfull)
+\hyphenpenalty=10000   % penalidade máxima para hifenização
+\exhyphenpenalty=10000 % penalidade para hífens explícitos
+
 % abntex2 usa sans-serif nos títulos por padrão — forçamos serifada em tudo
 % \mdseries = peso médio (sem negrito) nos níveis menores — visual mais leve
 \renewcommand{\ABNTEXchapterfont}{\rmfamily\bfseries}
