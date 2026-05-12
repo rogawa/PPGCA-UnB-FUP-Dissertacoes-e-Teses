@@ -25,11 +25,63 @@
 % CONFIGURAÇÃO DO TRABALHO – edite aqui
 % ============================================================
 
-\newcommand{\tipodotrabalho}{Tese de Doutorado}
-%\newcommand{\tipodotrabalho}{Dissertação de Mestrado}
+% ============================================================
+% CONFIGURAÇÃO DO TRABALHO – edite aqui
+% ============================================================
 
-\newcommand{\grautitulo}{Doutor(a) em Ciências Ambientais}
-%\newcommand{\grautitulo}{Mestre(a) em Ciências Ambientais}
+% Booleanos de tipo — devem ser declarados antes de qualquer uso
+\newif\ifprojeto
+\newif\ifmestrado
+
+% ------------------------------------------------------------
+% TIPO DE DOCUMENTO — descomente UMA das quatro opções abaixo
+% ------------------------------------------------------------
+%\projetotrue\mestradotrue    % Projeto de Pesquisa de Mestrado
+%\projetotrue\mestradofalse   % Projeto de Pesquisa de Doutorado
+%\projetofalse\mestradotrue   % Dissertação de Mestrado
+\projetofalse\mestradofalse   % Tese de Doutorado  ← padrão
+
+\ifprojeto
+  \ifmestrado
+    \newcommand{\tipodotrabalho}{Projeto de Mestrado}
+    \newcommand{\grautitulo}{Mestre em Ciências Ambientais}
+    \newcommand{\titulobanca}{BANCA EXAMINADORA DE QUALIFICAÇÃO}
+    \newcommand{\naturezatrabalho}{%
+      Projeto de pesquisa apresentado ao Programa de
+      Pós-Graduação em Ciências Ambientais da Universidade
+      de Brasília como requisito para o \textbf{Exame de
+      Qualificação} ao título de Mestre em Ciências Ambientais.}
+  \else
+    \newcommand{\tipodotrabalho}{Projeto de Doutorado}
+    \newcommand{\grautitulo}{Doutor em Ciências Ambientais}
+    \newcommand{\titulobanca}{BANCA EXAMINADORA DE QUALIFICAÇÃO}
+    \newcommand{\naturezatrabalho}{%
+      Projeto de pesquisa apresentado ao Programa de
+      Pós-Graduação em Ciências Ambientais da Universidade
+      de Brasília como requisito para o \textbf{Exame de
+      Qualificação} ao título de Doutor em Ciências Ambientais.}
+  \fi
+\else
+  \ifmestrado
+    \newcommand{\tipodotrabalho}{Dissertação de Mestrado}
+    \newcommand{\grautitulo}{Mestre(a) em Ciências Ambientais}
+    \newcommand{\titulobanca}{BANCA EXAMINADORA}
+    \newcommand{\naturezatrabalho}{%
+      Dissertação apresentada ao Programa de Pós-Graduação
+      em Ciências Ambientais da Universidade de Brasília
+      como requisito para obtenção do título de
+      Mestre(a) em Ciências Ambientais.}
+  \else
+    \newcommand{\tipodotrabalho}{Tese de Doutorado}
+    \newcommand{\grautitulo}{Doutor(a) em Ciências Ambientais}
+    \newcommand{\titulobanca}{BANCA EXAMINADORA}
+    \newcommand{\naturezatrabalho}{%
+      Tese apresentada ao Programa de Pós-Graduação
+      em Ciências Ambientais da Universidade de Brasília
+      como requisito para obtenção do título de
+      Doutor(a) em Ciências Ambientais.}
+  \fi
+\fi
 
 \titulo{Título do Trabalho: subtítulo se houver}
 \autor{Fulano(a) de Tal}
@@ -54,11 +106,10 @@
 \newcommand{\bancaTitularIII}{Prof. Dr. Membro Titular 3 -- Membro Interno\\Universidade de Brasília}
 \newcommand{\bancaSuplente}{Prof. Dr. Membro Suplente\\Universidade de Brasília}
 
-% Data de aprovação (folha de aprovação)
+% Data de aprovação / qualificação (folha de aprovação)
 \newcommand{\dataAprovacao}{\_\_\_ de \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ de \_\_\_\_\_\_}
 
-% Referência bibliográfica do trabalho (cabeçalho obrigatório dos resumos)
-% Formato: SOBRENOME, Nome. Título. Ano. N f. Tipo – Programa, Instituição, Local, Ano.
+% Referência bibliográfica do trabalho (cabeçalho opcional dos resumos)
 \newcommand{\refbibliografica}{%
   SOBRENOME, Nome. \textit{\imprimirtitulo}. \MesAno. N~f.
   \tipodotrabalho~-- Programa de Pós-Graduação em Ciências Ambientais,
@@ -73,15 +124,15 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{mathptmx}           % Times New Roman (texto e math)
 
 % Desativa hifenização — ajuste de kerning automático via \sloppy
 \tolerance=2000
 \emergencystretch=3em
 \hyphenpenalty=10000
 \exhyphenpenalty=10000
+\hbadness=10000  % suprime avisos Underfull \hbox
 \usepackage{mathptmx}           % Times New Roman (texto e math)
- 
+
 % Desativa hifenização — justificação por ajuste de espaço entre palavras
 \tolerance=1000        % tolerância para espaço entre palavras
 \emergencystretch=3em  % espaço extra em último recurso (evita overfull)
@@ -327,10 +378,7 @@
   \hspace{.45\textwidth}
   \begin{minipage}{.5\textwidth}
     \SingleSpacing
-    \tipodotrabalho~apresentada ao Programa de
-    Pós-Graduação em Ciências Ambientais da
-    Universidade de Brasília como requisito para
-    obtenção do título de~\grautitulo.
+    \naturezatrabalho
 
     \vspace{0.5cm}
     \textbf{Área de concentração:} \areaConcentracao
@@ -359,6 +407,7 @@
 %    O arquivo PDF recebido deve ser salvo como "ficha-catalografica.pdf"
 %    na raiz do projeto e a linha \includepdf abaixo descomentada.
 % ------------------------------------------------------------
+\ifprojeto\else  % ficha catalográfica não se aplica ao projeto de pesquisa
 \begin{fichacatalografica}
   % ► Quando receber o PDF da BCE, salve-o como "ficha-catalografica.pdf"
   %   na raiz do projeto, descomente a linha abaixo e apague o \fbox.
@@ -395,6 +444,7 @@
   \end{center}
   \vspace*{\fill}
 \end{fichacatalografica}
+\fi % fim \ifprojeto\else (fichacatalografica)
 
 % ------------------------------------------------------------
 % 4. FOLHA DE APROVAÇÃO
@@ -415,10 +465,7 @@
     \hspace{.45\textwidth}
     \begin{minipage}{.5\textwidth}
       \SingleSpacing\small
-      \tipodotrabalho~apresentada ao Programa de
-      Pós-Graduação em Ciências Ambientais da
-      Universidade de Brasília como requisito para
-      obtenção do título de~\grautitulo.
+      \naturezatrabalho\\[0.3cm]
       \textbf{Área de concentração:} \areaConcentracao.
       \textbf{Linha de pesquisa:} \linhaPesquisa.
     \end{minipage}
@@ -429,7 +476,7 @@
 
   \vspace{0.5cm}
   \begin{center}
-  \noindent\textbf{BANCA EXAMINADORA}
+  \noindent\textbf{\titulobanca}
 
   \vspace{0.8cm}
   \rule{8cm}{0.4pt}\\[2pt]
@@ -454,8 +501,9 @@
 \end{folhadeaprovacao}
 
 % ------------------------------------------------------------
-% 5. DEDICATÓRIA
+% 5. DEDICATÓRIA (não se aplica ao projeto de pesquisa)
 % ------------------------------------------------------------
+\ifprojeto\else
 \begin{dedicatoria}
   \vspace*{\fill}
   \noindent\hfill
@@ -464,10 +512,12 @@
     Dedico este trabalho a \ldots
   \end{minipage}
 \end{dedicatoria}
+\fi
 
 % ------------------------------------------------------------
-% 6. AGRADECIMENTOS
+% 6. AGRADECIMENTOS (não se aplica ao projeto de pesquisa)
 % ------------------------------------------------------------
+\ifprojeto\else
 \begin{agradecimentos}
   Agradeço ao Prof.\ Dr.\ \ldots
 
@@ -475,10 +525,12 @@
 
   À CAPES / CNPq / FAPDF pelo apoio financeiro \ldots
 \end{agradecimentos}
+\fi
 
 % ------------------------------------------------------------
-% 7. EPÍGRAFE
+% 7. EPÍGRAFE (não se aplica ao projeto de pesquisa)
 % ------------------------------------------------------------
+\ifprojeto\else
 \begin{epigrafe}
   \vspace*{\fill}
   \noindent\hfill
@@ -489,17 +541,15 @@
     \normalfont -- Autor da Epígrafe
   \end{minipage}
 \end{epigrafe}
+\fi
 
 % ------------------------------------------------------------
 % 8. RESUMO (português)
 % ------------------------------------------------------------
 \begin{resumo}
-  \SingleSpacing
-  % Cabeçalho obrigatório (NBR 14724): referência bibliográfica do trabalho
-  \refbibliografica
-
-  \vspace{\onelineskip}
   \OnehalfSpacing
+  % Cabeçalho de referência bibliográfica — opcional, descomente se exigido pelo programa:
+  % \SingleSpacing\refbibliografica\vspace{\onelineskip}\OnehalfSpacing
   O mercúrio (Hg) é um contaminante global cuja dinâmica em solos
   tropicais ainda é pouco compreendida, especialmente no bioma Cerrado.
   Este trabalho investigou a distribuição, o fator de acumulação e o
@@ -527,12 +577,9 @@
 % ------------------------------------------------------------
 \begin{resumo}[Abstract]
   \begin{otherlanguage*}{english}
-    \SingleSpacing
-    % Mandatory reference header (NBR 14724)
-    \refbibliografica
-
-    \vspace{\onelineskip}
     \OnehalfSpacing
+    % Optional reference header — uncomment if required by your program:
+    % \SingleSpacing\refbibliografica\vspace{\onelineskip}\OnehalfSpacing
     Mercury (Hg) is a global contaminant whose dynamics in tropical soils
     remain poorly understood, particularly in the Cerrado biome. This study
     investigated the distribution, accumulation factor, and sequestration of
@@ -668,9 +715,12 @@
 \label{cap:exemplos}
 \input{capitulos/07-exemplos}
 
-\chapter{Considerações Finais}
-\label{cap:conclusao}
-\input{capitulos/06-conclusao}
+% Considerações Finais — omitidas no projeto de pesquisa (exame de qualificação)
+\ifprojeto\else
+  \chapter{Considerações Finais}
+  \label{cap:conclusao}
+  \input{capitulos/06-conclusao}
+\fi
 
 % ============================================================
 % ELEMENTOS PÓS-TEXTUAIS
