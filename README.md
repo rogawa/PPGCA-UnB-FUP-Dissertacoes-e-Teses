@@ -1,6 +1,6 @@
 # Template LaTeX – PPGCA/UnB Planaltina
-**Tese de Doutorado / Dissertação de Mestrado**
-*Programa de Pós-Graduação em Ciências Ambientais*
+**Projeto de Pesquisa / Dissertação de Mestrado / Tese de Doutorado**  
+*Programa de Pós-Graduação em Ciências Ambientais*  
 *Faculdade UnB de Planaltina – Universidade de Brasília*
 
 ---
@@ -10,7 +10,7 @@
 **Autor do template:** Rui Ogawa  
 **Afiliação:** PPGCA/UnB | Fiocruz Brasília | IFB Planaltina  
 **Contato:** ruiogawa@gmail.com  
-**Versão:** 1.0 (2026)  
+**Versão:** 2.0 (2026)  
 **Licença:** Creative Commons BY 4.0
 
 ---
@@ -19,22 +19,56 @@
 
 ```
 ppgca-unb/
-├── main.tex                  ← Arquivo principal (compile este)
-├── referencias.bib           ← Referências bibliográficas (BibTeX)
-├── unb-logo.png              ← Logo da UnB (baixe em unb.br/identidade-visual)
-├── ficha-catalografica.pdf   ← Gerada em ficha.bce.unb.br (adicionar depois)
+├── main.tex                      ← Arquivo principal (compile este)
+├── referencias.bib               ← Referências bibliográficas (BibTeX)
+├── unb-logo.png                  ← Logo da UnB (baixe em http://www.marca.unb.br/)
+├── ficha-catalografica.pdf       ← Gerada automaticamente pela BCE/UnB (adicionar depois)
 └── capitulos/
     ├── 01-introducao.tex
-    ├── 02-objetivos.tex
-    ├── 03-contextualizacao.tex
-    ├── cap1.tex              ← Capítulo 1 (artigo/estudo)
-    ├── cap2.tex              ← Capítulo 2
-    ├── cap3.tex              ← Capítulo 3
-    ├── conclusao.tex
+    ├── 02-materiais-metodos.tex
+    ├── 03-recursos-financeiros.tex
+    ├── 04-cronograma.tex
+    ├── 05-resultados.tex
+    ├── 06-conclusao.tex
+    ├── 07-exemplos.tex           ← Exemplos de tabelas, figuras, equações e código
     ├── apendice-a.tex
     ├── apendice-b.tex
     └── anexo-a.tex
 ```
+
+> **Nota:** Todo o conteúdo dos capítulos é fictício e serve apenas para demonstrar
+> o layout. Substitua pelo conteúdo real da sua pesquisa antes de submeter.
+
+---
+
+## Tipo de documento
+
+Este template suporta três tipos de documento. Edite **apenas quatro linhas** no
+topo da seção de configuração do `main.tex`:
+
+```latex
+%\projetotrue\mestradotrue    % Projeto de Pesquisa de Mestrado
+%\projetotrue\mestradofalse   % Projeto de Pesquisa de Doutorado
+%\projetofalse\mestradotrue   % Dissertação de Mestrado
+\projetofalse\mestradofalse   % Tese de Doutorado  ← padrão
+```
+
+O template ajusta automaticamente todos os textos, a folha de aprovação e os
+elementos pré/pós-textuais:
+
+| Elemento                     | Projeto | Dissertação | Tese |
+|------------------------------|:-------:|:-----------:|:----:|
+| Capa                         | ✅      | ✅          | ✅   |
+| Folha de rosto               | ✅      | ✅          | ✅   |
+| Ficha catalográfica          | ❌      | ✅          | ✅   |
+| Folha de aprovação           | ✅      | ✅          | ✅   |
+| Dedicatória                  | ❌      | ✅          | ✅   |
+| Agradecimentos               | ❌      | ✅          | ✅   |
+| Epígrafe                     | ❌      | ✅          | ✅   |
+| Resumo / Abstract            | ✅      | ✅          | ✅   |
+| Listas e Sumário             | ✅      | ✅          | ✅   |
+| Considerações Finais         | ❌      | ✅          | ✅   |
+| Título da banca              | BANCA EXAMINADORA DE QUALIFICAÇÃO | BANCA EXAMINADORA | BANCA EXAMINADORA |
 
 ---
 
@@ -43,98 +77,130 @@ ppgca-unb/
 1. **Importe o projeto:**
    - No Overleaf, clique em *New Project → Upload Project*
    - Envie o arquivo `.zip` com todos os arquivos
-   
+
 2. **Configure o compilador:**
    - Menu (⚙) → Compiler → **pdfLaTeX**
-   - O Overleaf compilará automaticamente na sequência
-     `pdfLaTeX → BibTeX → pdfLaTeX → pdfLaTeX`
 
-3. **Configure seus dados** em `main.tex`:
+3. **Escolha o tipo de documento** em `main.tex` (veja seção acima)
+
+4. **Configure seus dados** em `main.tex`:
    - `\titulo{...}` — título do trabalho
    - `\autor{...}` — seu nome completo
    - `\orientador{...}` — nome do orientador
-   - `\data{...}` — mês/ano de defesa
+   - `\MesAno` — mês/ano de defesa ou qualificação
    - Membros da banca (`\bancaPresidente`, `\bancaTitularI`, etc.)
-   - Escolha entre `\tipodotrabalho{Tese de Doutorado}` ou
-     `{Dissertação de Mestrado}`
+   - Área de concentração e linha de pesquisa
 
-4. **Escreva seu conteúdo** nos arquivos dentro de `capitulos/`
+5. **Escreva seu conteúdo** nos arquivos dentro de `capitulos/`
 
-5. **Referências bibliográficas:**
+6. **Referências bibliográficas:**
    - Adicione entradas no arquivo `referencias.bib`
-   - Cite no texto com `\cite{chave}` ou `\citeonline{chave}`
+   - Cite com `\cite{chave}` ou `\citeonline{chave}`
 
 ---
 
-## Recursos avançados: Backref (citação reversa)
+## Ficha catalográfica
 
-O template inclui o pacote `backref` configurado para que:
-- **Ao clicar em uma citação** no texto → vai para a entrada na lista de referências
-- **Na lista de referências**, cada entrada exibe quantas vezes foi citada
-  e em quais páginas
-- **Ao clicar na página** mencionada → retorna para onde está a citação no texto
+A ficha catalográfica é gerada **automaticamente** pela BCE/UnB:  
+🔗 https://bce.unb.br/elaboracao-de-fichas-catalograficas/
 
-Exemplo de saída nas referências:
-> Silva, J. et al. Título do artigo. *Revista X*, 2024.  
-> <span style="color:gray">*Citado 3 vezes nas páginas 15, 32, 47.*</span>
-
----
-
-## Normas ABNT atendidas
-
-- **NBR 14724:2011** – Trabalhos acadêmicos (apresentação)
-- **NBR 6023:2018** – Referências bibliográficas
-- **NBR 6024:2012** – Numeração progressiva
-- **NBR 6027:2012** – Sumário
-- **NBR 6028:2003** – Resumo
-- **NBR 10520:2002** – Citações
+Quando receber o PDF:
+1. Salve como `ficha-catalografica.pdf` na raiz do projeto
+2. Descomente `\includepdf{ficha-catalografica}` na seção da ficha em `main.tex`
+3. Apague o bloco `\fbox{...}` do placeholder
+4. Descomente `\usepackage{pdfpages}` no preâmbulo
 
 ---
 
-## Elementos pré-textuais incluídos
+## Recursos avançados
 
-| Elemento | Status |
+### Backref – Citação reversa
+- Ao clicar em uma citação no texto → vai para a entrada nas referências
+- Cada referência exibe em quais páginas foi citada e quantas vezes
+- Ao clicar na página → retorna ao local da citação no texto
+
+### Tipografia
+- Fonte **Times New Roman** em todo o documento, incluindo títulos (sem sans-serif)
+- **Hifenização desativada** — espaçamento entre palavras ajustado automaticamente
+- Links clicáveis em **preto** (sem cores), conforme exigido pelos programas de pós
+
+### Tabelas
+- Três espessuras de régua:
+  - `\toprule` / `\bottomrule` → 1,5 pt (borda externa)
+  - `\midrule` → 0,5 pt (separador de grupos)
+  - `\thinrule` → 0,2 pt (separador entre linhas individuais)
+- Exemplos em `capitulos/07-exemplos.tex`: tabela simples, multicoluna com
+  divisores verticais e longtable (código comentado para referência)
+
+### Gráficos
+- Exemplos de figura simples e subfiguras lado a lado
+- `pgfplots` disponível mas comentado (pesado para Overleaf free)
+- Recomendação: exporte gráficos como PDF do R ou Python e insira via
+  `\includegraphics` — compila instantaneamente
+
+### Código-fonte
+- Pacote `listings` configurado para Python e R
+- Lista de Códigos gerada automaticamente
+
+### Citações longas
+- Use `\begin{citacao}...\end{citacao}` (ambiente nativo do abntex2)
+- Fonte 10 pt, recuo 4 cm, espaço simples — conforme NBR 10520
+
+---
+
+## Normas ABNT verificadas
+
+| Norma | Conteúdo |
 |---|---|
-| Capa | ✅ |
-| Folha de rosto | ✅ |
-| Ficha catalográfica | ✅ (rascunho; substitua pelo PDF da BCE) |
-| Folha de aprovação | ✅ |
-| Dedicatória | ✅ |
-| Agradecimentos | ✅ |
-| Epígrafe | ✅ |
-| Resumo (português) | ✅ |
-| Abstract (inglês) | ✅ |
-| Lista de figuras | ✅ |
-| Lista de tabelas | ✅ |
-| Lista de abreviaturas e siglas | ✅ |
-| Lista de símbolos | ✅ |
-| Sumário | ✅ |
+| **NBR 14724:2011** | Trabalhos acadêmicos — apresentação |
+| **NBR 6023:2018** | Referências bibliográficas |
+| **NBR 6024:2012** | Numeração progressiva de seções |
+| **NBR 6027:2012** | Sumário |
+| **NBR 6028:2003** | Resumo |
+| **NBR 10520:2002** | Citações |
 
-## Elementos pós-textuais incluídos
-
-| Elemento | Status |
-|---|---|
-| Referências bibliográficas | ✅ |
-| Apêndices | ✅ |
-| Anexos | ✅ |
-| Índice remissivo | ✅ (opcional) |
+Formatação aplicada:
+- Margens: esquerda/superior 3 cm, direita/inferior 2 cm
+- Fonte: Times New Roman 12 pt (texto), 10 pt (legendas, notas, citações longas)
+- Espaçamento: 1,5 no texto; simples em notas de rodapé, legendas e referências
+- Recuo de parágrafo: 1,25 cm
+- Filete de notas de rodapé: 3 cm a partir da margem esquerda
+- Legendas: `Figura X –` e `Tabela X –` (travessão, rótulo em negrito)
+- Palavras-chave separadas por ponto-e-vírgula
 
 ---
 
-## Pacotes utilizados
+## Compatibilidade com Overleaf gratuito
+
+Otimizado para compilar dentro do limite de **20 segundos** do plano gratuito.
+Pacotes pesados (`pgfplots`, `pdfpages`, `siunitx`, `microtype`, `rotating`)
+estão comentados no preâmbulo com instruções para reativação.
+
+Para uso em **Overleaf self-hosted** ou compilação **local (TeX Live)**,
+descomente o bloco de pacotes avançados indicado no preâmbulo.
+
+---
+
+## Pacotes ativos
 
 | Pacote | Finalidade |
 |---|---|
-| `abntex2` | Classe base ABNT para trabalhos acadêmicos brasileiros |
-| `abntex2cite` | Citações e referências no estilo ABNT |
-| `backref` | Citação reversa (backlinks nas referências) |
+| `abntex2` | Classe base ABNT |
+| `abntex2cite` | Citações e referências ABNT (autor-data) |
+| `backref` | Citação reversa com links |
 | `hyperref` | Links clicáveis no PDF |
-| `mathptmx` | Fonte Times New Roman |
-| `graphicx` | Figuras e imagens |
-| `booktabs` | Tabelas com formatação profissional |
-| `listings` | Código-fonte com destaque de sintaxe |
-| `siunitx` | Unidades do SI e formatação numérica |
-| `microtype` | Melhoras tipográficas avançadas |
+| `mathptmx` | Times New Roman |
+| `graphicx` | Figuras |
+| `caption` + `subcaption` | Legendas 10 pt e subfiguras |
+| `booktabs` | Réguas calibradas em tabelas |
+| `tabularx` | Colunas de largura flexível |
+| `multirow` | Células multilinhas |
+| `listings` | Código-fonte (Python, R) |
+| `amsmath` | Equações |
+| `xcolor` | Cores |
+| `url` | URLs |
+| `lastpage` | Referência à última página |
+| `indentfirst` | Recuo no primeiro parágrafo |
 
 ---
 
@@ -142,4 +208,5 @@ Exemplo de saída nas referências:
 
 - Documentação abntex2: https://www.abntex.net.br
 - Overleaf Learn: https://www.overleaf.com/learn
-- Repositório deste template: [link do Overleaf Gallery]
+- Repositório GitHub: https://github.com/ruiogawa/ppgca-unb-template
+- Overleaf Gallery: [link após publicação]
