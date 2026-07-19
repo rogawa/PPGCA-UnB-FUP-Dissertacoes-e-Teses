@@ -32,6 +32,7 @@
 % Booleanos de tipo — devem ser declarados antes de qualquer uso
 \newif\ifprojeto
 \newif\ifmestrado
+\newif\ifcapitulado
 
 % ------------------------------------------------------------
 % TIPO DE DOCUMENTO — descomente UMA das quatro opções abaixo
@@ -40,6 +41,29 @@
 %\projetotrue\mestradofalse   % Projeto de Pesquisa de Doutorado
 %\projetofalse\mestradotrue   % Dissertação de Mestrado
 \projetofalse\mestradofalse   % Tese de Doutorado  ← padrão
+
+% ------------------------------------------------------------
+% MODELO ESTRUTURAL DOS CAPÍTULOS — descomente UMA das opções abaixo
+% ------------------------------------------------------------
+% Esta opção é INDEPENDENTE do tipo de documento acima: qualquer um
+% dos quatro tipos (projeto, dissertação ou tese) pode ser redigido
+% no modelo tradicional ou no modelo por capítulos autônomos.
+%
+%   \capituladofalse -> Modelo tradicional (padrão): um único fio
+%     narrativo dividido em Introdução, Materiais e Métodos,
+%     Resultados e Discussão, Considerações Finais etc.
+%
+%   \capituladotrue  -> Modelo por capítulos autônomos ("estilo
+%     artigo"): o Capítulo 1 traz a fundamentação geral, o problema,
+%     a área de estudo, o objetivo geral e a seção consolidada de
+%     Objetivos Específicos e Hipóteses; cada capítulo de conteúdo
+%     (2, 3, 4...) é publicável de forma independente e repete a
+%     mesma estrutura interna -- Resumo do Capítulo, Introdução,
+%     Objetivo, Hipótese, Metodologia e Contribuições Esperadas --;
+%     e o último capítulo integra as contribuições e conclui o
+%     trabalho. Veja capitulos/capitulado-*.tex.
+\capituladofalse               % Modelo tradicional <- padrão
+%\capituladotrue               % Modelo por capítulos autônomos
 
 \ifprojeto
   \ifmestrado
@@ -691,6 +715,55 @@
 \clearpage
 \setcounter{chapter}{0}
 
+\ifcapitulado
+% ============================================================
+% MODELO POR CAPÍTULOS AUTÔNOMOS
+% ------------------------------------------------------------
+% Cada capítulo de conteúdo (2, 3, 4...) é publicável de forma
+% independente e repete a mesma estrutura interna: Resumo do
+% Capítulo, Introdução, Objetivo, Hipótese (quando aplicável),
+% Metodologia e Contribuições Esperadas. Para adicionar mais
+% capítulos, copie um arquivo capitulos/capitulado-0X-*.tex,
+% ajuste seu conteúdo e acrescente o \chapter/\input correspondente
+% aqui, antes do capítulo de conclusão.
+% ============================================================
+
+\chapter{Fundamentação Geral, Problema e Área de Estudo}
+\label{cap:fundamentacao}
+\input{capitulos/capitulado-01-fundamentacao}
+
+\chapter{Título do Capítulo 2 (Objetivo Específico 1)}
+\label{cap:capitulo2}
+\input{capitulos/capitulado-02-exemplo}
+
+\chapter{Título do Capítulo 3 (Objetivo Específico 2)}
+\label{cap:capitulo3}
+\input{capitulos/capitulado-03-exemplo}
+
+\chapter{Exemplos de Elementos Gráficos e Tabelas}
+\label{cap:exemplos}
+\input{capitulos/07-exemplos}
+
+\chapter{Recursos Financeiros}
+\label{cap:recursos}
+\input{capitulos/03-recursos-financeiros}
+
+\chapter{Cronograma}
+\label{cap:cronograma}
+\input{capitulos/04-cronograma}
+
+% Capítulo integrador — omitido no projeto de pesquisa (exame de qualificação)
+\ifprojeto\else
+  \chapter{Contribuições Integradas e Conclusão}
+  \label{cap:conclusao}
+  \input{capitulos/capitulado-04-conclusao}
+\fi
+
+\else
+% ============================================================
+% MODELO TRADICIONAL
+% ============================================================
+
 \chapter{Introdução}
 \label{cap:introducao}
 \input{capitulos/01-introducao}
@@ -721,6 +794,8 @@
   \label{cap:conclusao}
   \input{capitulos/06-conclusao}
 \fi
+
+\fi % fim \ifcapitulado
 
 % ============================================================
 % ELEMENTOS PÓS-TEXTUAIS
