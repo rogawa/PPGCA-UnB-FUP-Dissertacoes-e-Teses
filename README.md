@@ -114,6 +114,65 @@ Para adicionar mais capítulos de conteúdo:
 
 ---
 
+## Idioma do corpo do texto
+
+Independente das duas opções acima, o corpo do texto pode ser redigido em
+português ou em inglês. Edite uma linha em `main.tex`:
+
+```latex
+\inglesfalse   % Corpo do texto em português  ← padrão
+%\inglestrue   % Corpo do texto em inglês
+```
+
+Essa opção troca o idioma ativo do babel — e com ele, automaticamente,
+todos os textos padronizados do abnTeX2 (Sumário/Contents, Capítulo/
+Chapter, Referências/References, Lista de Ilustrações/List of Figures
+etc.) e os títulos dos capítulos definidos em `main.tex` (`\titIntroducao`,
+`\titFundamentacao` etc.).
+
+**O que permanece em português mesmo com `\inglestrue`** — por exigência
+das normas de pós-graduação da UnB (ex.: PPGENF, PPGSC), que listam
+"Resumo na Língua Portuguesa" como item pré-textual obrigatório
+independentemente do idioma de redação:
+
+| Elemento | Comportamento |
+|----------|----------------|
+| Capa, folha de rosto, folha de aprovação, natureza do trabalho, título da banca | Sempre em português (registro institucional oficial) |
+| Resumo | Sempre em português e sempre antes do Abstract |
+| Abstract | Sempre em inglês (já existia no template) |
+| Conteúdo dos capítulos de exemplo (`capitulos/*.tex`) | Não é traduzido automaticamente — o conteúdo fictício é só um exemplo de layout; escreva seu texto real no idioma escolhido |
+
+Se o seu programa exigir uma **segunda folha de rosto em inglês** (prática
+documentada em outros programas, como o IF/USP — não confirmada para o
+PPGCA/UnB no momento em que este template foi escrito; **verifique com a
+secretaria do seu programa**), há um bloco pronto porém comentado logo
+após a folha de rosto em português no `main.tex`. Para usá-lo:
+
+1. Preencha `\tituloingles{...}` na seção de configuração.
+2. Descomente o bloco `% \ifingles ... \fi` da folha de rosto em inglês.
+
+---
+
+## Estilo de citação/referência
+
+Também independente do idioma: as normas de pós-graduação da UnB (ex.:
+PPGSC) permitem tanto **ABNT** quanto **Vancouver/numérico**, desde que
+uma única norma seja seguida em todo o trabalho — a escolha não é
+determinada pelo idioma de redação. Verifique o regimento do seu programa
+antes de decidir. Edite uma linha em `main.tex`:
+
+```latex
+\citacaonumericafalse   % ABNT autor-data (NBR 10520/6023)  ← padrão
+%\citacaonumericatrue   % Numérico (estilo Vancouver-like)
+```
+
+| Estilo | Exemplo no texto | Quando usar |
+|--------|-------------------|-------------|
+| ABNT autor-data (`alf`) | (SILVA; SOUZA, 2024) | Padrão ABNT, comum em programas brasileiros |
+| Numérico (`num`) | (1), (2) ou [1], [2] | Comum em periódicos internacionais das ciências naturais |
+
+---
+
 ## Como usar no Overleaf
 
 1. **Importe o projeto:**
@@ -123,7 +182,7 @@ Para adicionar mais capítulos de conteúdo:
 2. **Configure o compilador:**
    - Menu (⚙) → Compiler → **pdfLaTeX**
 
-3. **Escolha o tipo de documento e o modelo estrutural** em `main.tex` (veja seções acima)
+3. **Escolha o tipo de documento, o modelo estrutural, o idioma e o estilo de citação** em `main.tex` (veja seções acima)
 
 4. **Configure seus dados** em `main.tex`:
    - `\titulo{...}` — título do trabalho

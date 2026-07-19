@@ -33,6 +33,8 @@
 \newif\ifprojeto
 \newif\ifmestrado
 \newif\ifcapitulado
+\newif\ifingles
+\newif\ifcitacaonumerica
 
 % ------------------------------------------------------------
 % TIPO DE DOCUMENTO — descomente UMA das quatro opções abaixo
@@ -64,6 +66,52 @@
 %     trabalho. Veja capitulos/capitulado-*.tex.
 \capituladofalse               % Modelo tradicional <- padrão
 %\capituladotrue               % Modelo por capítulos autônomos
+
+% ------------------------------------------------------------
+% IDIOMA DO CORPO DO TEXTO — descomente UMA das opções abaixo
+% ------------------------------------------------------------
+% Também independente das opções acima. Controla o idioma ATIVO do
+% babel (hifenização e todos os textos automáticos do abntex2, como
+% "Sumário"/"Contents", "Referências"/"References", "Capítulo"/
+% "Chapter", "Lista de Ilustrações"/"List of Figures" etc.) e os
+% títulos dos capítulos definidos mais abaixo neste arquivo.
+%
+% O que NÃO muda com esta opção -- por exigência das normas da UnB/
+% ABNT (NBR 14724), que valem independentemente do idioma de redação
+% do corpo do texto:
+%   - Elementos institucionais (capa, folha de rosto, folha de
+%     aprovação, natureza do trabalho, título da banca) permanecem
+%     em português: são o registro oficial do trabalho perante a
+%     UnB/CAPES/BCE.
+%   - O Resumo em português continua obrigatório e aparece sempre
+%     ANTES do Abstract, mesmo com \inglestrue (várias normas de
+%     pós-graduação da UnB -- ex.: PPGENF, PPGSC -- listam "Resumo
+%     na Língua Portuguesa" e "Resumo na Língua Inglesa" como itens
+%     pré-textuais obrigatórios independentemente do idioma da tese).
+%
+% Se o seu programa exigir uma segunda folha de rosto em inglês
+% (prática comum em alguns programas, ex. IF/USP), veja o bloco
+% opcional comentado logo após a folha de rosto em português.
+\inglesfalse                  % Corpo do texto em português <- padrão
+%\inglestrue                  % Corpo do texto em inglês
+
+% ------------------------------------------------------------
+% ESTILO DE CITAÇÃO/REFERÊNCIA — descomente UMA das opções abaixo
+% ------------------------------------------------------------
+% Independente do idioma: as normas de pós-graduação da UnB (ex.
+% PPGSC) permitem tanto ABNT quanto Vancouver/numérico, desde que uma
+% única norma seja seguida em todo o trabalho -- a escolha não é
+% determinada pelo idioma de redação. Verifique o regimento do seu
+% programa antes de decidir.
+%
+%   \citacaonumericafalse -> ABNT autor-data (NBR 10520/6023,
+%     estilo "alf" do abntex2cite) <- padrão deste template.
+%
+%   \citacaonumericatrue  -> Numérico (estilo "num" do abntex2cite,
+%     próximo de Vancouver), comum em periódicos internacionais das
+%     ciências naturais.
+\citacaonumericafalse         % ABNT autor-data <- padrão
+%\citacaonumericatrue         % Numérico (Vancouver-like)
 
 \ifprojeto
   \ifmestrado
@@ -108,6 +156,10 @@
 \fi
 
 \titulo{Título do Trabalho: subtítulo se houver}
+% Tradução do título — usada apenas se você ativar a segunda folha de
+% rosto em inglês (bloco opcional comentado após a folha de rosto em
+% português, mais abaixo neste arquivo).
+\newcommand{\tituloingles}{Work Title: subtitle if any}
 \autor{Fulano(a) de Tal}
 \local{Brasília/DF}
 \newcommand{\MesAno}{Mês/Ano}
@@ -200,8 +252,13 @@
 \definecolor{unb-azul}{RGB}{0,70,130}
 
 \usepackage{listings}           % blocos de código
-\renewcommand{\lstlistingname}{Código}
-\renewcommand{\lstlistlistingname}{Lista de Códigos}
+\ifingles
+  \renewcommand{\lstlistingname}{Listing}
+  \renewcommand{\lstlistlistingname}{List of Listings}
+\else
+  \renewcommand{\lstlistingname}{Código}
+  \renewcommand{\lstlistlistingname}{Lista de Códigos}
+\fi
 \lstset{
   basicstyle=\footnotesize\ttfamily,
   breaklines=true,
@@ -261,16 +318,28 @@
 }
 
 % --------------------------------------------------------
-%  ABNTEX2CITE – citações ABNT autor-data
+%  ABNTEX2CITE – citações ABNT autor-data OU numérico
+%  (controlado por \ifcitacaonumerica, ver configuração no topo)
 % --------------------------------------------------------
-\usepackage[alf,
-  abnt-emphasize=bf,
-  abnt-etal-list=3,
-  abnt-etal-text=it,
-  abnt-and-type=e,
-  abnt-last-names=abnt,
-  abnt-repeated-author-omit=yes
-]{abntex2cite}
+\ifcitacaonumerica
+  \usepackage[num,
+    abnt-emphasize=bf,
+    abnt-etal-list=3,
+    abnt-etal-text=it,
+    abnt-and-type=e,
+    abnt-last-names=abnt,
+    abnt-repeated-author-omit=yes
+  ]{abntex2cite}
+\else
+  \usepackage[alf,
+    abnt-emphasize=bf,
+    abnt-etal-list=3,
+    abnt-etal-text=it,
+    abnt-and-type=e,
+    abnt-last-names=abnt,
+    abnt-repeated-author-omit=yes
+  ]{abntex2cite}
+\fi
 
 % ============================================================
 %  PACOTES PARA INSTÂNCIA LOCAL / SELF-HOSTED (descomente)
@@ -360,6 +429,14 @@
 \frenchspacing
 \pagestyle{ppgca}
 
+% Idioma ativo do babel (controla hifenização e todos os textos
+% automáticos do abntex2 -- ver \ifingles na configuração no topo)
+\ifingles
+  \selectlanguage{english}
+\else
+  \selectlanguage{brazil}
+\fi
+
 % ============================================================
 % ELEMENTOS PRÉ-TEXTUAIS
 % ============================================================
@@ -422,6 +499,53 @@
   \vfill
   {\large\imprimirlocal\\\MesAno}
 \end{folhaderosto}
+
+% ------------------------------------------------------------
+% 2b. FOLHA DE ROSTO EM INGLÊS (OPCIONAL)
+%     Alguns programas de pós-graduação exigem uma segunda folha de
+%     rosto em inglês quando o trabalho é redigido nesse idioma
+%     (prática documentada, por exemplo, no IF/USP: "são duas folhas
+%     de rosto: uma em português, obrigatoriamente a primeira, e uma
+%     em inglês"). O PPGCA/UnB não tem esse requisito confirmado no
+%     momento em que este template foi escrito — CONFIRME com a
+%     secretaria do seu programa antes de usar. Se for exigida,
+%     descomente o bloco abaixo (ele já respeita \ifingles) e
+%     preencha \tituloingles{} lá em cima, na seção de configuração.
+% ------------------------------------------------------------
+% \ifingles
+% \begin{folhaderosto}
+%   \begin{otherlanguage*}{english}
+%   \center
+%   {\large\bfseries UNIVERSITY OF BRAS\'ILIA}\\
+%   {\large\bfseries FUP -- FACULTY UnB PLANALTINA}\\
+%   {\normalsize GRADUATE PROGRAM IN ENVIRONMENTAL SCIENCES}
+%   \vfill
+%   {\large\imprimirautor}
+%   \vfill
+%   {\large\bfseries\MakeUppercase{\tituloingles}}
+%   \vfill
+%   \hspace{.45\textwidth}
+%   \begin{minipage}{.5\textwidth}
+%     \SingleSpacing
+%     % Traduza \naturezatrabalho manualmente aqui, por exemplo:
+%     % Thesis submitted to the Graduate Program in Environmental
+%     % Sciences at the University of Bras\'ilia as a requirement
+%     % for the degree of \grautitulo.
+%
+%     \vspace{0.5cm}
+%     \textbf{Concentration area:} \areaConcentracao
+%
+%     \vspace{0.3cm}
+%     \textbf{Research line:} \linhaPesquisa
+%
+%     \vspace{0.5cm}
+%     \textbf{Advisor:} \imprimirorientador
+%   \end{minipage}%
+%   \vfill
+%   {\large\imprimirlocal\\\MesAno}
+%   \end{otherlanguage*}
+% \end{folhaderosto}
+% \fi
 
 % ------------------------------------------------------------
 % 3. FICHA CATALOGRÁFICA
@@ -568,9 +692,12 @@
 \fi
 
 % ------------------------------------------------------------
-% 8. RESUMO (português)
+% 8. RESUMO (português) — sempre em português e sempre primeiro,
+% independentemente de \ifingles (exigência das normas de pós-
+% graduação da UnB; ver nota em \ifingles no topo do arquivo)
 % ------------------------------------------------------------
-\begin{resumo}
+\begin{resumo}[Resumo]
+  \begin{otherlanguage*}{brazil}
   \OnehalfSpacing
   % Cabeçalho de referência bibliográfica — opcional, descomente se exigido pelo programa:
   % \SingleSpacing\refbibliografica\vspace{\onelineskip}\OnehalfSpacing
@@ -594,10 +721,12 @@
   \noindent
   \textbf{Palavras-chave:} Mercúrio; Cerrado; Solo; Serapilheira;
   Bioacumulação; Matéria orgânica.
+  \end{otherlanguage*}
 \end{resumo}
 
 % ------------------------------------------------------------
-% 9. ABSTRACT (inglês)
+% 9. ABSTRACT (inglês) — sempre em inglês e sempre depois do Resumo
+% em português, independentemente de \ifingles
 % ------------------------------------------------------------
 \begin{resumo}[Abstract]
   \begin{otherlanguage*}{english}
@@ -715,6 +844,38 @@
 \clearpage
 \setcounter{chapter}{0}
 
+% ------------------------------------------------------------
+% TÍTULOS DOS CAPÍTULOS (PT/EN) — controlados por \ifingles.
+% Definidos aqui para manter os blocos \ifcapitulado abaixo legíveis;
+% edite o texto em português OU em inglês conforme o idioma do seu
+% trabalho.
+% ------------------------------------------------------------
+\ifingles
+  \newcommand{\titFundamentacao}{General Background, Problem Statement and Study Area}
+  \newcommand{\titCapituloA}{Chapter 2 Title (Specific Objective 1)}
+  \newcommand{\titCapituloB}{Chapter 3 Title (Specific Objective 2)}
+  \newcommand{\titExemplos}{Examples of Graphical Elements and Tables}
+  \newcommand{\titRecursos}{Budget}
+  \newcommand{\titCronograma}{Schedule}
+  \newcommand{\titConclusaoIntegrada}{Integrated Contributions and Conclusion}
+  \newcommand{\titIntroducao}{Introduction}
+  \newcommand{\titMetodologia}{Materials and Methods}
+  \newcommand{\titResultados}{Results and Discussion}
+  \newcommand{\titConclusao}{Final Remarks}
+\else
+  \newcommand{\titFundamentacao}{Fundamentação Geral, Problema e Área de Estudo}
+  \newcommand{\titCapituloA}{Título do Capítulo 2 (Objetivo Específico 1)}
+  \newcommand{\titCapituloB}{Título do Capítulo 3 (Objetivo Específico 2)}
+  \newcommand{\titExemplos}{Exemplos de Elementos Gráficos e Tabelas}
+  \newcommand{\titRecursos}{Recursos Financeiros}
+  \newcommand{\titCronograma}{Cronograma}
+  \newcommand{\titConclusaoIntegrada}{Contribuições Integradas e Conclusão}
+  \newcommand{\titIntroducao}{Introdução}
+  \newcommand{\titMetodologia}{Materiais e Métodos}
+  \newcommand{\titResultados}{Resultados e Discussão}
+  \newcommand{\titConclusao}{Considerações Finais}
+\fi
+
 \ifcapitulado
 % ============================================================
 % MODELO POR CAPÍTULOS AUTÔNOMOS
@@ -728,33 +889,33 @@
 % aqui, antes do capítulo de conclusão.
 % ============================================================
 
-\chapter{Fundamentação Geral, Problema e Área de Estudo}
+\chapter{\titFundamentacao}
 \label{cap:fundamentacao}
 \input{capitulos/capitulado-01-fundamentacao}
 
-\chapter{Título do Capítulo 2 (Objetivo Específico 1)}
+\chapter{\titCapituloA}
 \label{cap:capitulo2}
 \input{capitulos/capitulado-02-exemplo}
 
-\chapter{Título do Capítulo 3 (Objetivo Específico 2)}
+\chapter{\titCapituloB}
 \label{cap:capitulo3}
 \input{capitulos/capitulado-03-exemplo}
 
-\chapter{Exemplos de Elementos Gráficos e Tabelas}
+\chapter{\titExemplos}
 \label{cap:exemplos}
 \input{capitulos/07-exemplos}
 
-\chapter{Recursos Financeiros}
+\chapter{\titRecursos}
 \label{cap:recursos}
 \input{capitulos/03-recursos-financeiros}
 
-\chapter{Cronograma}
+\chapter{\titCronograma}
 \label{cap:cronograma}
 \input{capitulos/04-cronograma}
 
 % Capítulo integrador — omitido no projeto de pesquisa (exame de qualificação)
 \ifprojeto\else
-  \chapter{Contribuições Integradas e Conclusão}
+  \chapter{\titConclusaoIntegrada}
   \label{cap:conclusao}
   \input{capitulos/capitulado-04-conclusao}
 \fi
@@ -764,33 +925,33 @@
 % MODELO TRADICIONAL
 % ============================================================
 
-\chapter{Introdução}
+\chapter{\titIntroducao}
 \label{cap:introducao}
 \input{capitulos/01-introducao}
 
-\chapter{Materiais e Métodos}
+\chapter{\titMetodologia}
 \label{cap:metodologia}
 \input{capitulos/02-materiais-metodos}
 
-\chapter{Recursos Financeiros}
+\chapter{\titRecursos}
 \label{cap:recursos}
 \input{capitulos/03-recursos-financeiros}
 
-\chapter{Cronograma}
+\chapter{\titCronograma}
 \label{cap:cronograma}
 \input{capitulos/04-cronograma}
 
-\chapter{Resultados e Discussão}
+\chapter{\titResultados}
 \label{cap:resultados}
 \input{capitulos/05-resultados}
 
-\chapter{Exemplos de Elementos Gráficos e Tabelas}
+\chapter{\titExemplos}
 \label{cap:exemplos}
 \input{capitulos/07-exemplos}
 
 % Considerações Finais — omitidas no projeto de pesquisa (exame de qualificação)
 \ifprojeto\else
-  \chapter{Considerações Finais}
+  \chapter{\titConclusao}
   \label{cap:conclusao}
   \input{capitulos/06-conclusao}
 \fi
