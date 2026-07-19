@@ -24,13 +24,17 @@ ppgca-unb/
 ├── unb-logo.png                  ← Logo da UnB (baixe em http://www.marca.unb.br/)
 ├── ficha-catalografica.pdf       ← Gerada automaticamente pela BCE/UnB (adicionar depois)
 └── capitulos/
-    ├── 01-introducao.tex
-    ├── 02-materiais-metodos.tex
-    ├── 03-recursos-financeiros.tex
-    ├── 04-cronograma.tex
-    ├── 05-resultados.tex
-    ├── 06-conclusao.tex
-    ├── 07-exemplos.tex           ← Exemplos de tabelas, figuras, equações e código
+    ├── 01-introducao.tex                  ← modelo tradicional
+    ├── 02-materiais-metodos.tex           ← modelo tradicional
+    ├── 03-recursos-financeiros.tex        ← usado nos dois modelos
+    ├── 04-cronograma.tex                  ← usado nos dois modelos
+    ├── 05-resultados.tex                  ← modelo tradicional
+    ├── 06-conclusao.tex                   ← modelo tradicional
+    ├── 07-exemplos.tex                    ← usado nos dois modelos (tabelas, figuras, equações, código)
+    ├── capitulado-01-fundamentacao.tex    ← modelo por capítulos autônomos
+    ├── capitulado-02-exemplo.tex          ← modelo por capítulos autônomos (com hipótese)
+    ├── capitulado-03-exemplo.tex          ← modelo por capítulos autônomos (sem hipótese)
+    ├── capitulado-04-conclusao.tex        ← modelo por capítulos autônomos
     ├── apendice-a.tex
     ├── apendice-b.tex
     └── anexo-a.tex
@@ -67,8 +71,46 @@ elementos pré/pós-textuais:
 | Epígrafe                     | ❌      | ✅          | ✅   |
 | Resumo / Abstract            | ✅      | ✅          | ✅   |
 | Listas e Sumário             | ✅      | ✅          | ✅   |
-| Considerações Finais         | ❌      | ✅          | ✅   |
+| Considerações Finais / Capítulo de Conclusão | ❌      | ✅          | ✅   |
 | Título da banca              | BANCA EXAMINADORA DE QUALIFICAÇÃO | BANCA EXAMINADORA | BANCA EXAMINADORA |
+
+---
+
+## Modelo estrutural dos capítulos
+
+Independentemente do tipo de documento acima, o template suporta dois modelos
+de organização do corpo do texto. Edite **uma linha** logo abaixo da
+configuração de tipo de documento em `main.tex`:
+
+```latex
+\capituladofalse               % Modelo tradicional  ← padrão
+%\capituladotrue               % Modelo por capítulos autônomos
+```
+
+| Modelo | Quando usar | Estrutura |
+|--------|-------------|-----------|
+| **Tradicional** (`\capituladofalse`) | Trabalho com um único fio narrativo | Introdução → Materiais e Métodos → Recursos Financeiros → Cronograma → Resultados e Discussão → Considerações Finais |
+| **Capítulos autônomos** (`\capituladotrue`) | Trabalho organizado como uma sequência de capítulos publicáveis de forma independente (um por Objetivo Específico) | Capítulo 1 (Fundamentação, Problema, Área de Estudo, Objetivo Geral e seção consolidada de Objetivos Específicos e Hipóteses) → Capítulos de conteúdo (2, 3, 4...) → Recursos Financeiros → Cronograma → Capítulo final de Contribuições Integradas e Conclusão |
+
+No modelo por capítulos autônomos, **cada capítulo de conteúdo repete a mesma
+estrutura interna**: Resumo do Capítulo, Introdução, Objetivo, Hipótese
+(quando aplicável — omita esta seção em capítulos que não testam uma
+hipótese formal, como os que constroem infraestrutura ou ferramentas),
+Metodologia e Contribuições Esperadas. Os identificadores de Objetivo
+Específico (OE) e de Hipótese (H) usados em cada capítulo remetem de volta à
+seção consolidada no Capítulo 1, evitando que o leitor precise localizar cada
+objetivo e hipótese espalhados ao longo do texto.
+
+Para adicionar mais capítulos de conteúdo:
+
+1. Copie `capitulos/capitulado-02-exemplo.tex` (ou `capitulado-03-exemplo.tex`,
+   se o capítulo não testar uma hipótese) para um novo arquivo.
+2. Ajuste o conteúdo, mantendo os rótulos (`\label`) únicos.
+3. Em `main.tex`, dentro do bloco `\ifcapitulado`, acrescente o par
+   `\chapter{...}` / `\input{...}` correspondente, antes do capítulo final de
+   conclusão.
+4. Atualize a tabela e a lista de Objetivos Específicos e Hipóteses no
+   `capitulos/capitulado-01-fundamentacao.tex`.
 
 ---
 
@@ -81,7 +123,7 @@ elementos pré/pós-textuais:
 2. **Configure o compilador:**
    - Menu (⚙) → Compiler → **pdfLaTeX**
 
-3. **Escolha o tipo de documento** em `main.tex` (veja seção acima)
+3. **Escolha o tipo de documento e o modelo estrutural** em `main.tex` (veja seções acima)
 
 4. **Configure seus dados** em `main.tex`:
    - `\titulo{...}` — título do trabalho
