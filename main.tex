@@ -71,13 +71,13 @@
 % IDIOMA DO CORPO DO TEXTO — descomente UMA das opções abaixo
 % ------------------------------------------------------------
 % Também independente das opções acima. Controla o idioma ATIVO do
-% babel (hifenização e todos os textos automáticos do abntex2, como
+% babel (hifenização e todos os textos automáticos do ex2, como
 % "Sumário"/"Contents", "Referências"/"References", "Capítulo"/
 % "Chapter", "Lista de Ilustrações"/"List of Figures" etc.) e os
 % títulos dos capítulos definidos mais abaixo neste arquivo.
 %
 % O que NÃO muda com esta opção -- por exigência das normas da UnB/
-% ABNT (NBR 14724), que valem independentemente do idioma de redação
+%  (NBR 14724), que valem independentemente do idioma de redação
 % do corpo do texto:
 %   - Elementos institucionais (capa, folha de rosto, folha de
 %     aprovação, natureza do trabalho, título da banca) permanecem
@@ -99,18 +99,18 @@
 % ESTILO DE CITAÇÃO/REFERÊNCIA — descomente UMA das opções abaixo
 % ------------------------------------------------------------
 % Independente do idioma: as normas de pós-graduação da UnB (ex.
-% PPGSC) permitem tanto ABNT quanto Vancouver/numérico, desde que uma
+% PPGSC) permitem tanto  quanto Vancouver/numérico, desde que uma
 % única norma seja seguida em todo o trabalho -- a escolha não é
 % determinada pelo idioma de redação. Verifique o regimento do seu
 % programa antes de decidir.
 %
-%   \citacaonumericafalse -> ABNT autor-data (NBR 10520/6023,
-%     estilo "alf" do abntex2cite) <- padrão deste template.
+%   \citacaonumericafalse ->  autor-data (NBR 10520/6023,
+%     estilo "alf" do ex2cite) <- padrão deste template.
 %
-%   \citacaonumericatrue  -> Numérico (estilo "num" do abntex2cite,
+%   \citacaonumericatrue  -> Numérico (estilo "num" do ex2cite,
 %     próximo de Vancouver), comum em periódicos internacionais das
 %     ciências naturais.
-\citacaonumericafalse         % ABNT autor-data <- padrão
+\citacaonumericafalse         %  autor-data <- padrão
 %\citacaonumericatrue         % Numérico (Vancouver-like)
 
 \ifprojeto
@@ -337,7 +337,8 @@
     abnt-etal-text=it,
     abnt-and-type=e,
     abnt-last-names=abnt,
-    abnt-repeated-author-omit=yes
+    abnt-repeated-author-omit=yes,
+    abnt-cite-style=nbr2023
   ]{abntex2cite}
 \fi
 
