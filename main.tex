@@ -291,15 +291,29 @@
 %  BACKREF – citação reversa (clique na ref → volta ao texto)
 % --------------------------------------------------------
 \usepackage{backref}
-\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
-\renewcommand{\backref}{}
-\renewcommand*{\backrefalt}[4]{%
-  \ifcase #1
-    \footnotesize\textit{Nenhuma citação no texto.}%
-  \or
-    \footnotesize\textit{Citado na página~#2.}%
-  \else
-    \footnotesize\textit{Citado #1~vezes nas páginas~#2.}%
+\ifingles
+  \renewcommand{\backrefpagesname}{Cited on page(s):~}
+  \renewcommand{\backref}{}
+  \renewcommand*{\backrefalt}[4]{%
+    \ifcase #1
+      \footnotesize\textit{Not cited in the text.}%
+    \or
+      \footnotesize\textit{Cited on page~#2.}%
+    \else
+      \footnotesize\textit{Cited #1~times on pages~#2.}%
+    \fi}
+\else
+  \renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+  \renewcommand{\backref}{}
+  \renewcommand*{\backrefalt}[4]{%
+    \ifcase #1
+      \footnotesize\textit{Nenhuma citação no texto.}%
+    \or
+      \footnotesize\textit{Citado na página~#2.}%
+    \else
+      \footnotesize\textit{Citado #1~vezes nas páginas~#2.}%
+    \fi}
+\fitnotesize\textit{Citado #1~vezes nas páginas~#2.}%
   \fi}
 
 % --------------------------------------------------------
